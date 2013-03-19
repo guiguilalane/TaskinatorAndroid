@@ -1,25 +1,46 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * @author guillaume
  *
  */
-public class ListT {
+public class ListT implements Iterable<Task>{
 
+	public static final String LISTT_ATTRIBUT_NAME = "listName";
+	
+	public static final String LISTT_ATTRIBUT_OPEN = "open";
+	
 	private String listName;
+	private boolean open;
 	private List<Task> taskList;
 	
+	
+	public ListIterator<Task> iterator() {
+		return taskList.listIterator();
+	}
 	
 	/**
 	 * The List of task constructor
 	 * @param name the name of the task list
 	 */
 	public ListT(String name) {
+		this(name, false);
+	}
+	
+	/**
+	 * The List of task constructor
+	 * @param name the name of the task list
+	 * @param state whether the list is open, whether tasks should be displayed
+	 */
+	public ListT(String name, boolean state) {
 		listName = name;
-		taskList = new ArrayList<Task>();
+		open = state;
+		taskList = new LinkedList<Task>();
 	}
 	
 	/**
@@ -35,6 +56,21 @@ public class ListT {
 	public void setListName(String listName) {
 		this.listName = listName;
 	}
+	
+	/**
+	 * @return whether tle list is open, whether tasks should be displayed
+	 */
+	public boolean isOpen() {
+		return open;
+	}
+	
+	/**
+	 * @param state the new state of the list
+	 */
+	public void setOpen(boolean state) {
+		open = state;
+	}
+	
 	/**
 	 * @return the list af all task in the task list
 	 */
@@ -72,7 +108,7 @@ public class ListT {
 	 * @param pos the position of the task to remove from the task list
 	 * @return the task which is removed from the task list
 	 */
-	public Task removeTask(int pos) {
+	public Task removeTaskFromIndex(int pos) {
 		return taskList.remove(pos);
 	}
 
@@ -81,13 +117,13 @@ public class ListT {
 	 */
 	@Override
 	public String toString() {
-		String s = listName + " :";
-		for(Task t: taskList) {
-			s += "\n\t" + t;
+		String s = listName;
+		if(open) {
+			s += " :";
+			for(Task t: taskList) {
+				s += "\n\t" + t;
+			}
 		}
 		return s;
 	}
-	
-	
-	
 }

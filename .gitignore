@@ -21,3 +21,6 @@ local.properties
 
 #Backup file
 *~
+
+#log file
+*.log

@@ -17,3 +17,6 @@ Idées :
 	- Quand on secoud l'apareil android, les tâches terminées sont retirées.
 	- une tâche retirée est mise dans une sorte de corbeille, que l'on peut vider
 	- si possible utiliser le systeme de reconnaissance vocale d'Android
+	
+	
+Important : Gérer l'appli quand l'utilisateur reçoit un appel.
