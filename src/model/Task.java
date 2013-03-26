@@ -47,14 +47,4 @@ public class Task {
 		this.checked = checked;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return taskName + (checked ? "is checked" : "is not checked");
-	}
-	
-	
-
 }
