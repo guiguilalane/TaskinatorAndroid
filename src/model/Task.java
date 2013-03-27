@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * 
  * @author guillaume
@@ -62,7 +63,4 @@ public class Task {
 	public String toString() {
 		return taskName + " " + (checked ? "is checked" : "is not checked");
 	}
-	
-	
-
 }
