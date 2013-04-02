@@ -169,7 +169,7 @@ précaution, en effet dans le cas d'une liste, la suppression de celle-ci impliq
 \subsection{Fonctionnalités secondaires}
 Voici les fonctionnalités secondaires:
 \paragraph{Paramètre:} cette fonctionnalité permet à l'utilisateur de modifier le type de l'élément sélectionné. Il pourra par exemple choisir de modifier une liste en liste ordonnée ou en une tâche. Cette fonctionnalité est à manipuler avec précaution, en effet si l'utilisateur décide de transformer une liste en tâche l'ensemble des éléments de la liste seront supprimés. %TODO A voir si on garde ?????
-\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre un élément dans l'arborescence de la liste. Dans le cas d'une liste, toutes ces tâches sont aussi montées/descendues d'un rang. %TODO A voir si on garde ???????
+\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre une liste ou une tâche. Dans le cas d'une liste, toutes ces tâches sont aussi montées/descendues d'un rang. %TODO A voir si on garde ??????? Dans le cas d'une tâche Est-ce qu'on est limitée à sa liste ou est-ce qu'on autorise un déplacement dans une autre liste ?????
 \paragraph{Aperçu:} cette fonctionnalité permet à l'utilisateur d'avoir un aperçu de sa liste, se qui permettra l'affichage d'un nombre plus important de tâches. %TODO A voir si on garde
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -180,8 +180,7 @@ Voici les fonctionnalités secondaires:
 
 %TODO A voir si on garde le storyboard
 \subsection{Storyboard}
-Le storyboard permet de montrer à quoi sert l'application. Il utilise les star people de Bill VerPlank. A la fin su storyboard, le personnage atteint son but et
-est satisfait. Nous avons donc ici créé notre storyboard pour notre application:
+Le storyboard permet de montrer à quoi sert l'application. Il utilise les star people de Bill VerPlank. A la fin su storyboard, le personnage atteint son but et est satisfait. Nous avons donc ici créé notre storyboard pour notre application:
 \begin{figure}[H]
     \center
 %    \includegraphics[width=13.9cm]{Images/storyboard.png}
@@ -225,23 +224,21 @@ Dans cette section, nous expliquons les choix effectués et pourquoi nous avons 
 \begin{itemize}
 %TODO A voir est-ce qu'on fait un bouton plus pour les listes et pour les taches on clique sur un champs
 %TODO Modifier tout le paragraphe
-\item \textbf{Fonctionnalité de création (liste et tâche):} nous avons décidé d'adopter un système de sélection de l'élément "fils". Expliquons
-ce système. Lorsque l'utilisateur créé une liste, un élément vide de cette liste apparaît. L'utilisateur doit alors sélectionner cet élément et définir de quel type l'élément sera. Lorsque cet élément à un type, un nouvel élément vide apparaît; l'utilisateur peut alors définir un autre élément et ainsi de suite. Si l'utilisateur ne souhaite pas continuer à remplir cette liste, il ne tient plus compte des éléments vides.
-\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé de placer ces fonctionnalités dans la boîte à outils plutôt que sur l'élément à déplacer pour un gain de temps au niveau de l'utilisation. En effet, si nous avions fait le choix de mettre les boutons \textit{monter} et \textit{descendre} sur l'élément, lorsque l'utilisateur aurait déplacé l'élément, il aurait perdu le focus de la souris sur ces boutons.
+\item \textbf{Fonctionnalité de création de liste:} nous avons choisi de créer de nouvelles listes en cliquant sur le bouton "+" en bas de l'écran. Un nouvel item apparaît sur la page et possède le focus. L'utilisateur doit seulement donner le nom de cette nouvelle liste. Un nouveau bouton "+" apparaît dans cette liste, il permettra de créer de nouvelles tâches pour la liste.
+\item \textbf{Fonctionnalité de création de tâche:} nous avons choisi de créer de nouvelles tâches en cliquant sur le bouton "+" présent sous chaque liste pour ajouter une tâche à la liste correspondante. Lorsque l'utilisateur clique sur ce bouton, un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+") avec le focus. L'utilisateur doit seulement renseigner le nom de la tâche. Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
+\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu.
 Attention, lors de l'utilisation de cette fonctionnalité dans une liste ordonnée; si on monte ou descend un élément de tel façon qu'un élément coché se trouve être en dessous d'un élément non coché dans la liste, alors le déplacement ne sera pas activé. (Cette dernière précaution n'a pas été implémentée)
-\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste sélectionnée peut entraîner la suppression d'éléments. Pour plus de sécurité, le focus de la validation de la suppression est par défaut sur \textit{Non}.
-\item \textbf{Fonctionnalité \textit{Paramètre}:} nous avons décidé pour cette fonctionnalité (qui peut entraîner la suppression de différents éléments) de faire, également, apparaître une fenêtre d'avertissement. Dans cette fenêtre le focus de la validation du changement est mise à \textit{Non}. On perd
-cependant un peu de vitesse d'exécution (si l'utilisateur souhaite effectivement bien effectuer ce changement) au profit de plus de sécurité.
-% \item \textbf{Widget désactivé :} nous avons décidé de griser tout menu, bouton inutilisable à un état de l'application afin que l'utilisateur n'exécute pas
-% d'actions impossibles. Cela évitera qu'il se pose des questions s'il voit aucun changement effectué.
+\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. Pour plus de sécurité, le focus de la validation de la suppression est par défaut sur \textit{Non}. %TODO A revoir si on a un focus sur android
+%TODO A revoir si on garde
+%\item \textbf{Fonctionnalité \textit{Paramètre}:} nous avons décidé pour cette fonctionnalité (qui peut entraîner la suppression de différents éléments) de faire, également, apparaître une fenêtre d'avertissement. Dans cette fenêtre le focus de la validation du changement est mise à \textit{Non}. On perd cependant un peu de vitesse d'exécution (si l'utilisateur souhaite effectivement bien effectuer ce changement) au profit de plus de sécurité.
 \end{itemize}
 
 %TODO a compléter
-L'application est tout d'abord ???composée d'un menu, d'une boite à outils et d'une zone réservée à l'affichage de la liste en cours de création.
+L'application est tout simplement composée d'une zone réservée à l'affichage de la liste en cours de création et d'une bar d'action. %TODO A revoir car on aura le plus mais est-ce qu'on pourrai pas imaginer par la suite un filtre sur le nom des listes ...
 \begin{figure}[H]
-    \center
+%    \center
 %    \includegraphics[width=14cm]{Images/mainWindow.png}
-    \caption{La fenêtre principale}
+    \caption{L'application}
 \end{figure}
 
 
@@ -249,9 +246,9 @@ L'application est tout d'abord ???composée d'un menu, d'une boite à outils et 
 %TODO Menu
 
 \subsection{Affichage des listes et tâches}
-Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser une/deux ??????ListeView. La première permettant d'afficher l'ensemble des listes et une pour chaque liste permettant d'afficher sa ou ses tâche(s). 
-%TODO A revoir nom des éléments
-La tâche est représentée par un ??? qui est composé d'une checkbox, d'un EditLine permettant de taper le nom de la tâche et d'un button permettant d'ajouter la fonctionnalité de suppression sur la tâche.
+Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et chacune d'entre elle sa ou ses tâche(s).
+La liste est décrite à l'aide du xml list.xml et est représentée par un EditText permettant de donner/modifier le nom de celle-ci et d'un ImageButton permettant d('ajouter la fonctionnalité de suppression de liste.
+La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un EditText permettant de taper le nom de la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 4
@@ -260,18 +257,15 @@ La tâche est représentée par un ??? qui est composé d'une checkbox, d'un Edi
 %TODO A modifier par guillaume
 \section{Le modèle}
 Afin de réaliser cette application nous nous sommes basés sur le modèle suivant dont voici le diagramme de classes:
-%\begin{figure}[htpb]
+\begin{figure}[htpb]
 %	\center
 %	\includegraphics[scale=0.5]{Images/dia_classe.png}
-%	\caption{Diagramme de classe du modèle}
-%\end{figure}
+	\caption{Diagramme de classe du modèle}
+\end{figure}
 
 Le modèle de cette application est composé d'un pattern composite permettant d'implémenter une structure d'arbre et de composer les différents objets ensemble.
-Nous avons donc ici un \textit{Component} qui peut être, soit une \textit{Task} (une tâche), soit une \textit{List} (une liste) qui elle-même peut ensuite être
-une \textit{SortedList} (une liste ordonnée), celle-ci hérite de la classe \textit{List}. Ce modèle permet donc comme expliqué ci-dessus de composer ces
-éléments et d'obtenir par exemple des listes de listes de tâches \dots 
-Nous pouvons donc gérer tous ces composants au sein de ce modèle et ainsi, ajouter un composant dans une liste, le supprimer, le déplacer d'un rang
-(dans les deux sens). Nous disposons aussi de toutes les fonctions permettant de déterminer si un composant est cochable ou non.
+Nous avons donc ici un \textit{Component} qui peut être, soit une \textit{Task} (une tâche), soit une \textit{List} (une liste) qui elle-même peut ensuite être une \textit{SortedList} (une liste ordonnée), celle-ci hérite de la classe \textit{List}. Ce modèle permet donc comme expliqué ci-dessus de composer ces éléments et d'obtenir par exemple des listes de listes de tâches \dots 
+Nous pouvons donc gérer tous ces composants au sein de ce modèle et ainsi, ajouter un composant dans une liste, le supprimer, le déplacer d'un rang (dans les deux sens). Nous disposons aussi de toutes les fonctions permettant de déterminer si un composant est cochable ou non.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 5
@@ -279,7 +273,13 @@ Nous pouvons donc gérer tous ces composants au sein de ce modèle et ainsi, ajo
 \newpage
 \section{Limite de l'application}
 Notre application à ses propres limites.
-%TODO A compléter si des idées
+On pourrait imaginer d'ajouter certaines fonctionnalitées comme par exemple:
+\begin{itemize}
+\item Recherche (\includegraphics[scale=0.2]{Images/search.png}): qui permetterai à l'utilisateur d'afficher seulement les listes qui ont un nom ou qui ont des tâches dont le nom contient la chaîne du filtre.
+\item Partage (\includegraphics[scale=0.2]{Images/share.png}): qui permettrai à l'utilisateur de partager sa ou ses listes sur des réseaux sociaux ou par mail.
+\item Favoris (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de mettre certaines listes ou tâches en favoris et d'y avoir accès via un onglet favoris. Cela permetterai d'avoir un accès plus rapide.
+\end{itemize}
+%TODO A compléter si des idées A voir si on met tout --> Programmer un rappel d'evenement sur une tâche ajouter un champ information/note
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  CONCLUSION GENERALE
