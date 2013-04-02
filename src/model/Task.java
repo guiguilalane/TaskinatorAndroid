@@ -7,6 +7,10 @@ package model;
  *
  */
 public class Task {
+	
+	public static final String TASK_ATTRIBUT_NAME = "taskName";
+	
+	public static final String TASK_ATTRIBUT_CHECKED = "checked";
 
 	private String taskName;
 	private boolean checked;
@@ -16,8 +20,12 @@ public class Task {
 	 * @param name the name of the task
 	 */
 	public Task(String name) {
+		this(name, false);
+	}
+	
+	public Task(String name, boolean check) {
 		taskName = name;
-		checked = false;
+		checked = check;
 	}
 	
 	/**
@@ -48,4 +56,11 @@ public class Task {
 		this.checked = checked;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return taskName + " " + (checked ? "is checked" : "is not checked");
+	}
 }
