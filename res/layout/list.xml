@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <EditText
+        android:id="@+id/idNameList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/idDeleteList"
+        android:hint="@string/taskList" />
+
+    <!-- A voir pour que le bouton prenne une taille carré -->
+
+    <ImageButton
+        android:id="@id/idDeleteList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/idNameList"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/trash_empty"
+        android:contentDescription="@string/deleteList" />
+
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <CheckBox
+        android:id="@+id/idCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/idNameTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/idDeleteTask"
+        android:layout_toRightOf="@id/idCheckbox"
+        android:hint="@string/taskName" />
+    
+        <!-- A voir pour que le bouton prenne une taille carré -->
+
+    <ImageButton
+        android:id="@id/idDeleteTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/idNameTask"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/trash_empty"
+        android:contentDescription="@string/deleteTask" />
+
+</RelativeLayout>
