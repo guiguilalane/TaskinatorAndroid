@@ -4,12 +4,9 @@
     <string name="app_name">Taskinator</string>
     <string name="title_activity_main">Taskinator</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_activite_tab">ActiviteTab</string>
-    <string name="title_activity_tab_list">TabList</string>
-    <string name="title_activity_tab_task">TabTask</string>
-    <string name="stateList">No List</string>
-    <string name="newList">Create new list</string>
-    
+    <string name="title_section1">List</string>
+    <string name="title_section2">Task</string>
+    <string name="newList">Create New List</string>
+    <string name="stateList">Aucune liste creee</string>
 
 </resources>
