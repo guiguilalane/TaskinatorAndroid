@@ -4,9 +4,9 @@
     <string name="app_name">Taskinator</string>
     <string name="title_activity_main">Taskinator</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">List</string>
-    <string name="title_section2">Task</string>
-    <string name="newList">Create New List</string>
-    <string name="stateList">Aucune liste creee</string>
+    <string name="taskName">Nom de la tache</string>
+    <string name="taskList">Nom de la liste</string>
+    <string name="deleteTask">Supprimer la tache</string>
+    <string name="deleteList">Supprimer la liste</string>
 
 </resources>
