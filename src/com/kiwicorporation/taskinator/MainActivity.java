@@ -1,15 +1,12 @@
 package com.kiwicorporation.taskinator;
 
-import java.util.ArrayList;
-
-import controleur.ListManager;
-
 import model.ListT;
 import model.Task;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ExpandableListView;
+import controleur.ListManager;
 
 public class MainActivity extends Activity {
 
@@ -23,17 +20,19 @@ public class MainActivity extends Activity {
 		// We take the expandable list of the XML
 		allListView = (ExpandableListView) findViewById(R.id.idAllList);
 
-		
 		for (int i = 1; i < 4; i++) {
 			ListT list = new ListT("Liste " + i);
-			ArrayList<Task> donnees = new ArrayList<Task>();
 			for (int x = 1; x < 4; x++) {
-				list.addTask(new Task("Task "+x));
+				list.addTask(new Task("Task " + x));
 			}
+			System.out.println("taille liste: " + list.getTaskList().size());
 			ListManager.getInstance().addList(list);
 		}
-	}
 
+		ELVAdapter adapter = new ELVAdapter(this/* , groupes */, ListManager
+				.getInstance().getLists());
+		allListView.setAdapter(adapter);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

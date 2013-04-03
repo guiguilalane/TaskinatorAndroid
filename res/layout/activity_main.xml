@@ -4,8 +4,10 @@
     android:orientation="vertical"
     android:padding="8dip" >
 
-<!--     <Button android:id="@+id/idAddList" -->
-<!--         android:text="Creer Liste" /> -->
+    <Button android:id="@+id/idAddList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Creer Liste" />
 
     <ExpandableListView
         android:id="@+id/idAllList"
