@@ -7,6 +7,9 @@ import model.Task;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 
 public class MainActivity extends Activity {
@@ -20,7 +23,7 @@ public class MainActivity extends Activity {
 
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
 
-		ArrayList<ListT> groupes = new ArrayList<ListT>();
+		final ArrayList<ListT> groupes = new ArrayList<ListT>();
 
 		for (int i = 1; i < 5; i++) {
 
@@ -37,9 +40,22 @@ public class MainActivity extends Activity {
 			groupes.add(groupe);
 		}
 
-		ELVAdapter adapter = new ELVAdapter(this, groupes);
+		final ELVAdapter adapter = new ELVAdapter(this, groupes);
 
 		expandableList.setAdapter(adapter);
+
+		Button addListButton = (Button) findViewById(R.id.idAddList);
+		addListButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				// TODO A configurer pour modifier le nom ...
+				groupes.add(new ListT("Bloup a configuer"));
+				adapter.notifyDataSetChanged();
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	@Override
