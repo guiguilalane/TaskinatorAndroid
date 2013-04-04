@@ -8,5 +8,6 @@
     <string name="listName">Nom de la liste</string>
     <string name="deleteTask">Supprimer la tache</string>
     <string name="deleteList">Supprimer la liste</string>
+    <string name="addTask">Ajouter une tache</string>
 
 </resources>

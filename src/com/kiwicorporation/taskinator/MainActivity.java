@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 
 		ArrayList<ListT> groupes = new ArrayList<ListT>();
 
-		for (int i = 1; i < 4; i++) {
+		for (int i = 1; i < 5; i++) {
 
 			ListT groupe = new ListT("Liste " + i);
 

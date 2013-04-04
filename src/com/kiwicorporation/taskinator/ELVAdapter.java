@@ -16,7 +16,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//TODO Add the state of liste expandable or note // save data // change name... // delete
+/*
+ * TODO:
+ * Save wich list is expanded or not
+ * Save data when app was quit
+ * Modify a list (menu or EditText)
+ * Add List and task
+ * Drag and drop pour déplacer une tâche
+ * Quand on déroule une liste se mettre à la position ou on déroule et non à la fin quand la liste est plus grande que l'écran
+ * Supprimer tous les todo et sysout
+ * Ajouter le plus dans les child (Exception retournée quand on déroule la première après la deuxième)
+ * Liste vide pas de flèche expandable
+ */
 
 public class ELVAdapter extends BaseExpandableListAdapter {
 
@@ -46,10 +57,13 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition,
+	public View getChildView(final int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		final Task objet = (Task) getChild(groupPosition, childPosition);
 
+		// if (!isLastChild) {
+		System.out.println("lastChild: " + isLastChild);
+		System.out.println("on passe autre");
+		final Task objet = (Task) getChild(groupPosition, childPosition);
 		ChildViewHolder childViewHolder;
 
 		if (convertView == null) {
@@ -88,6 +102,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 					@Override
 					public void onClick(View v) {
+						((ListT) getGroup(groupPosition)).removeTask(objet);
+						notifyDataSetChanged();
 						Toast.makeText(context,
 								"Delete Task : " + objet.getTaskName(),
 								Toast.LENGTH_SHORT).show();
@@ -95,12 +111,44 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 				});
 
 		return convertView;
+		// } else {
+		// System.out.println("dernier");
+		// ChildViewAdd childViewAdd;
+		//
+		// if (convertView == null) {
+		// System.out.println("on passe view null !");
+		// childViewAdd = new ChildViewAdd();
+		//
+		// convertView = inflater.inflate(R.layout.addtask, null);
+		//
+		// childViewAdd.addButtonChild = (ImageButton) convertView
+		// .findViewById(R.id.idAddTask);
+		//
+		// convertView.setTag(childViewAdd);
+		// } else {
+		// childViewAdd = (ChildViewAdd) convertView.getTag();
+		// }
+		//
+		// childViewAdd.addButtonChild.setFocusable(false);
+		// childViewAdd.addButtonChild.setFocusableInTouchMode(false);
+		// childViewAdd.addButtonChild
+		// .setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// Toast.makeText(context, "Ajout Task : ",
+		// Toast.LENGTH_SHORT).show();
+		// }
+		// });
+		//
+		// return convertView;
+		// }
 
 	}
 
 	@Override
 	public int getChildrenCount(int gPosition) {
-		return groupes.get(gPosition).getTaskList().size();
+		return groupes.get(gPosition).getTaskList().size()/* + 1 */;
 	}
 
 	@Override
@@ -119,7 +167,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
+	public View getGroupView(final int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		GroupViewHolder gholder;
 
@@ -147,6 +195,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 			@Override
 			public void onClick(View v) {
+				groupes.remove(groupPosition);
+				notifyDataSetChanged();
 				Toast.makeText(context,
 						"Delete Groupe : " + group.getListName(),
 						Toast.LENGTH_SHORT).show();
@@ -175,5 +225,9 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		public CheckBox checkboxChild;
 		public TextView textViewChild;
 		public ImageButton deleteButtonChild;
+	}
+
+	class ChildViewAdd {
+		public ImageButton addButtonChild;
 	}
 }
