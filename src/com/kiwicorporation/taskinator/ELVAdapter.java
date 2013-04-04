@@ -1,6 +1,6 @@
 package com.kiwicorporation.taskinator;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import model.ListT;
 import model.Task;
@@ -11,20 +11,19 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
-import controleur.ListManager;
 
 public class ELVAdapter extends BaseExpandableListAdapter {
-	private final Context context;
-	// private ArrayList<Groupe> groupes;
-	private final LayoutInflater inflater;
 
-	public ELVAdapter(Context context/* , ArrayList<Groupe> groupes */,
-			List<ListT> lists) {
+	private Context context;
+	private ArrayList<ListT> groupes;
+	private LayoutInflater inflater;
+
+	public ELVAdapter(Context context, ArrayList<ListT> groupes) {
 		this.context = context;
-		// this.groupes = groupes;
+		this.groupes = groupes;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -35,7 +34,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int gPosition, int cPosition) {
-		return ListManager.getInstance().getList(gPosition).getTask(cPosition);
+		return groupes.get(gPosition).getTaskList().get(cPosition);
 	}
 
 	@Override
@@ -46,8 +45,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		System.out.println("on passe dans child");
-		final Task task = (Task) getChild(groupPosition, childPosition);
+		final Task objet = (Task) getChild(groupPosition, childPosition);
 
 		ChildViewHolder childViewHolder;
 
@@ -56,33 +54,30 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 			convertView = inflater.inflate(R.layout.task, null);
 
-			childViewHolder.editTextChild = (EditText) convertView
-					.findViewById(R.id.idNameTask);
 			childViewHolder.checkboxChild = (CheckBox) convertView
 					.findViewById(R.id.idCheckbox);
-			childViewHolder.imageButtonChild = (ImageButton) convertView
+			childViewHolder.textViewChild = (TextView) convertView
+					.findViewById(R.id.idNameTask);
+			childViewHolder.deleteButtonChild = (ImageButton) convertView
 					.findViewById(R.id.idDeleteTask);
-			System.out.println("on passe childview");
+
 			convertView.setTag(childViewHolder);
 		} else {
 			childViewHolder = (ChildViewHolder) convertView.getTag();
 		}
 
-		childViewHolder.editTextChild.setText(task.getTaskName());
-		childViewHolder.checkboxChild.setOnClickListener(new OnClickListener() {
+		childViewHolder.checkboxChild.setChecked(objet.isChecked());
+		childViewHolder.textViewChild.setText(objet.getTaskName());
 
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(context, "Task : " + task.getTaskName(),
-						Toast.LENGTH_SHORT).show();
-			}
-		});
-		childViewHolder.imageButtonChild
+		childViewHolder.deleteButtonChild.setFocusable(false);
+		childViewHolder.deleteButtonChild.setFocusableInTouchMode(false);
+		childViewHolder.deleteButtonChild
 				.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						Toast.makeText(context, "DeleteTask",
+						Toast.makeText(context,
+								"Delete Task : " + objet.getTaskName(),
 								Toast.LENGTH_SHORT).show();
 					}
 				});
@@ -92,18 +87,17 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int gPosition) {
-		return ListManager.getInstance().getList(gPosition).getTaskList()
-				.size();
+		return groupes.get(gPosition).getTaskList().size();
 	}
 
 	@Override
 	public Object getGroup(int gPosition) {
-		return ListManager.getInstance().getList(gPosition);
+		return groupes.get(gPosition);
 	}
 
 	@Override
 	public int getGroupCount() {
-		return ListManager.getInstance().getLists().size();
+		return groupes.size();
 	}
 
 	@Override
@@ -116,16 +110,16 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 			View convertView, ViewGroup parent) {
 		GroupViewHolder gholder;
 
-		ListT list = (ListT) getGroup(groupPosition);
+		final ListT group = (ListT) getGroup(groupPosition);
 
 		if (convertView == null) {
 			gholder = new GroupViewHolder();
 
 			convertView = inflater.inflate(R.layout.list, null);
 
-			gholder.editTextGroup = (EditText) convertView
+			gholder.textViewGroup = (TextView) convertView
 					.findViewById(R.id.idNameList);
-			gholder.imageButtonGroup = (ImageButton) convertView
+			gholder.deleteButtonGroup = (ImageButton) convertView
 					.findViewById(R.id.idDeleteList);
 
 			convertView.setTag(gholder);
@@ -133,16 +127,19 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 			gholder = (GroupViewHolder) convertView.getTag();
 		}
 
-		gholder.editTextGroup.setText(list.getListName());
-		gholder.imageButtonGroup.setOnClickListener(new OnClickListener() {
+		gholder.textViewGroup.setText(group.getListName());
+		gholder.deleteButtonGroup.setFocusable(false);
+		gholder.deleteButtonGroup.setFocusableInTouchMode(false);
+		gholder.deleteButtonGroup.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Button deleteList : ",
+				Toast.makeText(context,
+						"Delete Groupe : " + group.getListName(),
 						Toast.LENGTH_SHORT).show();
 			}
 		});
-		System.out.println("avant return");
+
 		return convertView;
 	}
 
@@ -157,14 +154,14 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	}
 
 	class GroupViewHolder {
-		public EditText editTextGroup;
-		public ImageButton imageButtonGroup;
+		public TextView textViewGroup;
+		public ImageButton deleteButtonGroup;
 	}
 
 	class ChildViewHolder {
-		public EditText editTextChild;
 		public CheckBox checkboxChild;
-		public ImageButton imageButtonChild;
+		public TextView textViewChild;
+		public ImageButton deleteButtonChild;
 	}
 
 }

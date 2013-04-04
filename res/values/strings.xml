@@ -5,7 +5,7 @@
     <string name="title_activity_main">Taskinator</string>
     <string name="action_settings">Settings</string>
     <string name="taskName">Nom de la tache</string>
-    <string name="taskList">Nom de la liste</string>
+    <string name="listName">Nom de la liste</string>
     <string name="deleteTask">Supprimer la tache</string>
     <string name="deleteList">Supprimer la liste</string>
 

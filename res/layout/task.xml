@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
     <CheckBox
         android:id="@+id/idCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
 
-    <EditText
+    <!-- <EditText -->
+    <!-- android:id="@+id/idNameTask" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_toLeftOf="@+id/idDeleteTask" -->
+    <!-- android:layout_toRightOf="@id/idCheckbox" -->
+    <!-- android:clickable="false" -->
+    <!-- android:hint="@string/taskName" /> -->
+
+    <TextView
         android:id="@+id/idNameTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/idDeleteTask"
         android:layout_toRightOf="@id/idCheckbox"
-        android:hint="@string/taskName" />
-    
-        <!-- A voir pour que le bouton prenne une taille carré -->
+        android:text="@string/taskName" />
 
     <ImageButton
         android:id="@id/idDeleteTask"
@@ -25,7 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/idNameTask"
         android:layout_alignParentRight="true"
-        android:background="@drawable/trash_empty"
-        android:contentDescription="@string/deleteTask" />
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/deleteTask"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/trash_empty" />
 
 </RelativeLayout>
