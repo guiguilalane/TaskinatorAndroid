@@ -24,12 +24,12 @@ public class MainActivity extends Activity {
 
 		for (int i = 1; i < 4; i++) {
 
-			ListT groupe = new ListT("Groupe hjdfhvc" + i);
+			ListT groupe = new ListT("Liste " + i);
 
 			ArrayList<Task> donnees = new ArrayList<Task>();
 
 			for (int x = 1; x < 4; x++) {
-				donnees.add(new Task("Task " + x));
+				donnees.add(new Task("Task " + x, true));
 			}
 
 			groupe.setTaskList(donnees);

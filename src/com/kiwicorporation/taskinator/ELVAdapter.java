@@ -11,9 +11,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+//TODO Add the state of liste expandable or note // save data // change name... // delete
 
 public class ELVAdapter extends BaseExpandableListAdapter {
 
@@ -67,6 +70,15 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		}
 
 		childViewHolder.checkboxChild.setChecked(objet.isChecked());
+		childViewHolder.checkboxChild
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						objet.setChecked(isChecked);
+					}
+				});
 		childViewHolder.textViewChild.setText(objet.getTaskName());
 
 		childViewHolder.deleteButtonChild.setFocusable(false);
@@ -83,6 +95,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 				});
 
 		return convertView;
+
 	}
 
 	@Override
@@ -163,5 +176,4 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		public TextView textViewChild;
 		public ImageButton deleteButtonChild;
 	}
-
 }
