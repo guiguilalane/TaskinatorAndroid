@@ -52,8 +52,6 @@ public class MainActivity extends Activity {
 				// TODO A configurer pour modifier le nom ...
 				groupes.add(new ListT("Bloup a configuer"));
 				adapter.notifyDataSetChanged();
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}

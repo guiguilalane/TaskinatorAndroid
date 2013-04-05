@@ -4,10 +4,11 @@
     <string name="app_name">Taskinator</string>
     <string name="title_activity_main">Taskinator</string>
     <string name="action_settings">Settings</string>
-    <string name="taskName">Nom de la tache</string>
-    <string name="listName">Nom de la liste</string>
-    <string name="deleteTask">Supprimer la tache</string>
-    <string name="deleteList">Supprimer la liste</string>
-    <string name="addTask">Ajouter une tache</string>
+    <string name="taskName">Task name</string>
+    <string name="listName">List name</string>
+    <string name="deleteTask">Delete task</string>
+    <string name="deleteList">Delete list</string>
+    <string name="addTask">Add task</string>
+    <string name="addList">Add list</string>
 
 </resources>
