@@ -15,16 +15,16 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /*
  * TODO:
- * Save wich list is expanded or not
  * Save data when app was quit
  * Drag and drop pour déplacer une tâche
- * Quand on déroule une liste se mettre à la position ou on déroule et non à la fin quand la liste est plus grande que l'écran
+ * Quand on déroule une liste se mettre à la position ou on déroule et non à la fin quand la liste est plus grande que l'écran idem quand on ajoute/delete/modify
  * 
  * Est-ce qu'on laisse les toast si oui pour lesquel add modify supp ?????
  * 
@@ -34,6 +34,7 @@ import android.widget.Toast;
  * NOTE:
  * Revoir pour la façon dont est corriger le bug du bouton plus 
  * Revoir pour Add/Delete/Modify un moyen de créer les boites de dialog à part (dans une autre classe) Refractor
+ * Revoir si un autre moyen pour accéder a ExpandableListView du MainActivity que le passage dans le constructeur (Revérifier si les bonnes listes sont ouverte au chargement après sauvegarde)
  * 
  * FIXME:
  * Supprimer tous les todo et sysout
@@ -44,8 +45,11 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private ArrayList<ListT> groupes;
 	private LayoutInflater inflater;
+	private ExpandableListView elv;
 
-	public ELVAdapter(Context context, ArrayList<ListT> groupes) {
+	public ELVAdapter(Context context, ArrayList<ListT> groupes,
+			ExpandableListView elv) {
+		this.elv = elv;
 		this.context = context;
 		this.groupes = groupes;
 		inflater = LayoutInflater.from(context);
@@ -263,8 +267,10 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(final int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		GroupViewHolder gholder;
-
 		final ListT group = (ListT) getGroup(groupPosition);
+		if (group.isOpen()) {
+			elv.expandGroup(groupPosition);
+		}
 		if (convertView == null) {
 			gholder = new GroupViewHolder();
 

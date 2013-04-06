@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
 		for (int i = 1; i < 5; i++) {
 
-			ListT groupe = new ListT("Liste " + i);
+			ListT groupe = new ListT("Liste " + i, i == 2);
 
 			ArrayList<Task> donnees = new ArrayList<Task>();
 
@@ -43,10 +43,7 @@ public class MainActivity extends Activity {
 			groupes.add(groupe);
 		}
 
-		// TODO A voir pour parcours de toute la liste et expand group deja
-		// expanded
-
-		final ELVAdapter adapter = new ELVAdapter(this, groupes);
+		final ELVAdapter adapter = new ELVAdapter(this, groupes, expandableList);
 
 		expandableList.setAdapter(adapter);
 
