@@ -45,18 +45,20 @@ public class ListBackup {
 	public static ListBackup getInstance() {
 		return ListBackupHolder.instance;
 	}
-	
-	public List<ListT> getListFromInpuStream(InputStream file) throws TaskException, ListTException {
+
+	public List<ListT> getListFromInpuStream(InputStream file)
+			throws TaskException, ListTException {
 		List<ListT> listOfList = ListManager.getInstance().getLists();
-		
+
 		SAXBuilder builder = new SAXBuilder();
-		
+
 		try {
 			Document document = builder.build(file);
 			Element rootNode = document.getRootElement();
-			IteratorIterable<Element> listIterator = rootNode.getDescendants(new ElementFilter("list"));
+			IteratorIterable<Element> listIterator = rootNode
+					.getDescendants(new ElementFilter("list"));
 			Element currentElement;
-			while(listIterator.hasNext()) {
+			while (listIterator.hasNext()) {
 				currentElement = listIterator.next();
 				runTroughtListTag(listOfList, currentElement);
 			}
@@ -69,8 +71,9 @@ public class ListBackup {
 		}
 		return listOfList;
 	}
-	
-	public List<ListT> getListFromFile(String fileName) throws TaskException, ListTException {
+
+	public List<ListT> getListFromFile(String fileName) throws TaskException,
+			ListTException {
 		List<ListT> listOfList = ListManager.getInstance().getLists();
 
 		SAXBuilder builder = new SAXBuilder();
@@ -132,7 +135,7 @@ public class ListBackup {
 		}
 	}
 
-	public void saveListToFile(String fileName) {
+	public void saveListToFile(String fileName, FileOutputStream file) {
 		Element root = new Element("backup");
 		Document doc = new Document(root);
 
@@ -162,13 +165,12 @@ public class ListBackup {
 		}
 		try {
 			XMLOutputter xmlop = new XMLOutputter(Format.getPrettyFormat());
-			xmlop.output(doc, new FileOutputStream(fileName));
+			xmlop.output(doc, /* new FileOutputStream(fileName) */file);
 		} catch (IOException e) {
 		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("on pas");
 		ListBackup lb = ListBackup.getInstance();
 		ListManager manager = ListManager.getInstance();
 		try {
@@ -181,7 +183,7 @@ public class ListBackup {
 			e.printStackTrace();
 		}
 		/* System.out.println(manager); */
-		lb.saveListToFile("save.xml");
+		// lb.saveListToFile("save.xml");
 	}
 
 }
