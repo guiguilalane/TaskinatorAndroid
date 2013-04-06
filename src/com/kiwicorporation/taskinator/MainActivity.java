@@ -1,7 +1,13 @@
 package com.kiwicorporation.taskinator;
 
+import java.io.IOException;
+
+import xmlParsor.ListBackup;
+import controleur.ListManager;
 import model.ListT;
 import model.Task;
+import modelException.ListTException;
+import modelException.TaskException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import controleur.ListManager;
+
 
 public class MainActivity extends Activity {
 
@@ -24,8 +30,20 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
-
-		for (int i = 1; i < 5; i++) {
+		ListManager lManager = ListManager.getInstance();
+		try {
+			lManager.setListOfList(ListBackup.getInstance().getListFromInpuStream((getAssets().open("test.xml"))));
+		} catch (TaskException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ListTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*for (int i = 1; i < 5; i++) {
 
 			ListT groupe = new ListT("Liste " + i, i == 2);
 
@@ -34,7 +52,7 @@ public class MainActivity extends Activity {
 			}
 
 			ListManager.getInstance().addList(groupe);
-		}
+		}*/
 
 		final ELVAdapter adapter = new ELVAdapter(this, expandableList);
 

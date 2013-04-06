@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<backup>
+	<list listName="test" open="true">
+		<task taskName="plop" checked="true"/>
+		<task taskName="bloup" checked="false"/>
+	</list>
+	
+	<list listName="youhou" open="false">
+		<task taskName="bonjour" checked="false"/>
+		<task taskName="au revoir" checked="false"/>
+	</list>
+</backup>

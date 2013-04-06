@@ -4,13 +4,5 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/jdom-2.0.4.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/jdom-2.0.4-contrib.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/jdom-2.0.4-javadoc.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/jdom-2.0.4-junit.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/jdom-2.0.4-sources.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/lib/jaxen-1.1.4.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="./libs/jdom-2.0.4/lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

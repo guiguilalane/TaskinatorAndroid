@@ -2,6 +2,7 @@ package xmlParsor;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -47,6 +48,30 @@ public class ListBackup {
 	
 	public static ListBackup getInstance() {
 		return ListBackupHolder.instance;
+	}
+	
+	public List<ListT> getListFromInpuStream(InputStream file) throws TaskException, ListTException {
+		List<ListT> listOfList = ListManager.getInstance().getLists();
+		
+		SAXBuilder builder = new SAXBuilder();
+		
+		try {
+			Document document = builder.build(file);
+			Element rootNode = document.getRootElement();
+			IteratorIterable<Element> listIterator = rootNode.getDescendants(new ElementFilter("list"));
+			Element currentElement;
+			while(listIterator.hasNext()) {
+				currentElement = listIterator.next();
+				runTroughtListTag(listOfList, currentElement);
+			}
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listOfList;
 	}
 	
 	public List<ListT> getListFromFile(String fileName) throws TaskException, ListTException {
