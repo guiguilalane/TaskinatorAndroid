@@ -1,7 +1,5 @@
 package com.kiwicorporation.taskinator;
 
-import java.util.ArrayList;
-
 import model.ListT;
 import model.Task;
 import android.app.AlertDialog;
@@ -19,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import controleur.ListManager;
 
 /*
  * TODO:
@@ -43,15 +42,12 @@ import android.widget.Toast;
 public class ELVAdapter extends BaseExpandableListAdapter {
 
 	private Context context;
-	private ArrayList<ListT> groupes;
 	private LayoutInflater inflater;
 	private ExpandableListView elv;
 
-	public ELVAdapter(Context context, ArrayList<ListT> groupes,
-			ExpandableListView elv) {
+	public ELVAdapter(Context context, ExpandableListView elv) {
 		this.elv = elv;
 		this.context = context;
-		this.groupes = groupes;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -62,7 +58,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int gPosition, int cPosition) {
-		return groupes.get(gPosition).getTaskList().get(cPosition);
+		return ListManager.getInstance().getList(gPosition).getTask(cPosition);
 	}
 
 	@Override
@@ -244,17 +240,18 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int gPosition) {
-		return groupes.get(gPosition).getTaskList().size() + 1;
+		return ListManager.getInstance().getList(gPosition).getTaskList()
+				.size() + 1;
 	}
 
 	@Override
 	public Object getGroup(int gPosition) {
-		return groupes.get(gPosition);
+		return ListManager.getInstance().getList(gPosition);
 	}
 
 	@Override
 	public int getGroupCount() {
-		return groupes.size();
+		return ListManager.getInstance().getLists().size();
 	}
 
 	@Override
@@ -350,7 +347,10 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int id) {
-										groupes.remove(groupPosition);
+										ListManager.getInstance()
+												.removeListFromIndex(
+														groupPosition);
+										// groupes.remove(groupPosition);
 										notifyDataSetChanged();
 										Toast.makeText(
 												context,
@@ -390,12 +390,12 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public void onGroupCollapsed(int groupPosition) {
-		groupes.get(groupPosition).setOpen(false);
+		ListManager.getInstance().getList(groupPosition).setOpen(false);
 	}
 
 	@Override
 	public void onGroupExpanded(int groupPosition) {
-		groupes.get(groupPosition).setOpen(true);
+		ListManager.getInstance().getList(groupPosition).setOpen(true);
 	}
 
 	class GroupViewHolder {
