@@ -22,6 +22,9 @@ import controleur.ListManager;
 /*
  * TODO:
  * Quand on dŽroule une liste se mettre ˆ la position ou on dŽroule et non ˆ la fin quand la liste est plus grande que l'Žcran idem quand on ajoute/delete/modify
+ * 	--> Essai avec elv.setSelectedGroup(groupPosition); dans onGroupExpanded() mais a marche pas trs bien 
+ *	--> Idem quand on ajoute tache ... garder focus sur l'endroit ou on a fait l'action 
+ *
  * Drag and drop pour dŽplacer une t‰che
  * 
  * Toast --> Delete / Modify / Add ?
