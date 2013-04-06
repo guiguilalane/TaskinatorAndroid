@@ -22,30 +22,26 @@ import org.jdom2.util.IteratorIterable;
 
 import controleur.ListManager;
 
-
 /**
  * 
  * @author guillaume
- *
- *	XMLfile pattern :
- *	<backup>
- *		<list name="listName" open="true|false">
- *			</task name="taskName" checked="true|false"/>
- *		</list>
- *	</backup>
- *
- *
+ * 
+ *         XMLfile pattern : <backup> <list name="listName" open="true|false">
+ *         </task name="taskName" checked="true|false"/> </list> </backup>
+ * 
+ * 
  */
 public class ListBackup {
 
-	private ListBackup() {}
-	
-	private static class ListBackupHolder {
-		
-		private static final ListBackup instance = new ListBackup();
-		
+	private ListBackup() {
 	}
-	
+
+	private static class ListBackupHolder {
+
+		private static final ListBackup instance = new ListBackup();
+
+	}
+
 	public static ListBackup getInstance() {
 		return ListBackupHolder.instance;
 	}
@@ -76,15 +72,16 @@ public class ListBackup {
 	
 	public List<ListT> getListFromFile(String fileName) throws TaskException, ListTException {
 		List<ListT> listOfList = ListManager.getInstance().getLists();
-		
+
 		SAXBuilder builder = new SAXBuilder();
-		
+
 		try {
 			Document document = builder.build(fileName);
 			Element rootNode = document.getRootElement();
-			IteratorIterable<Element> listIterator = rootNode.getDescendants(new ElementFilter("list"));
+			IteratorIterable<Element> listIterator = rootNode
+					.getDescendants(new ElementFilter("list"));
 			Element currentElement;
-			while(listIterator.hasNext()) {
+			while (listIterator.hasNext()) {
 				currentElement = listIterator.next();
 				runTroughtListTag(listOfList, currentElement);
 			}
@@ -97,66 +94,81 @@ public class ListBackup {
 		}
 		return listOfList;
 	}
-	
-	private void runTroughtListTag(List<ListT> listOfList, Element currentElement) throws ListTException, TaskException {
-		if(currentElement.getName() == XMLComponent.XMLCOMPONENT_LIST) {
-			ListT lt = new ListT(currentElement.getAttributeValue(ListT.LISTT_ATTRIBUT_NAME),
-								  Boolean.parseBoolean(currentElement.getAttributeValue(ListT.LISTT_ATTRIBUT_OPEN)));
-			IteratorIterable<Element> taskIterator = currentElement.getDescendants(new ElementFilter("task"));
+
+	private void runTroughtListTag(List<ListT> listOfList,
+			Element currentElement) throws ListTException, TaskException {
+		if (currentElement.getName() == XMLComponent.XMLCOMPONENT_LIST) {
+			ListT lt = new ListT(
+					currentElement.getAttributeValue(ListT.LISTT_ATTRIBUT_NAME),
+					Boolean.parseBoolean(currentElement
+							.getAttributeValue(ListT.LISTT_ATTRIBUT_OPEN)));
+			IteratorIterable<Element> taskIterator = currentElement
+					.getDescendants(new ElementFilter("task"));
 			Element currentTask;
-			while(taskIterator.hasNext()) {
+			while (taskIterator.hasNext()) {
 				currentTask = taskIterator.next();
 				runThroughtTaskTag(lt, currentTask);
 			}
 			listOfList.add(lt);
 		} else {
-			//TODO: throw Exception
-			throw new ListTException("the xml file had bad format : " + currentElement.getName() + " tag get, list tag expected.");
+			// TODO: throw Exception
+			throw new ListTException("the xml file had bad format : "
+					+ currentElement.getName() + " tag get, list tag expected.");
 		}
 	}
-	
-	private void runThroughtTaskTag(ListT lt, Element currentTask) throws TaskException {
-		if(currentTask.getName() == XMLComponent.XMLCOMPONENT_TASK) {
-			Task t = new Task(currentTask.getAttributeValue(Task.TASK_ATTRIBUT_NAME),
-							  Boolean.parseBoolean(currentTask.getAttributeValue(Task.TASK_ATTRIBUT_CHECKED)));
+
+	private void runThroughtTaskTag(ListT lt, Element currentTask)
+			throws TaskException {
+		if (currentTask.getName() == XMLComponent.XMLCOMPONENT_TASK) {
+			Task t = new Task(
+					currentTask.getAttributeValue(Task.TASK_ATTRIBUT_NAME),
+					Boolean.parseBoolean(currentTask
+							.getAttributeValue(Task.TASK_ATTRIBUT_CHECKED)));
 			lt.addTask(t);
 		} else {
-			//TODO: throw Exception
-			throw new TaskException("The xml file had bad format : " + currentTask.getName() + " tag get, task tag expected.");
+			// TODO: throw Exception
+			throw new TaskException("The xml file had bad format : "
+					+ currentTask.getName() + " tag get, task tag expected.");
 		}
 	}
-	
+
 	public void saveListToFile(String fileName) {
 		Element root = new Element("backup");
 		Document doc = new Document(root);
-		
+
 		ListIterator<ListT> ltit = ListManager.getInstance().iterator();
 		ListT currentList;
-		while(ltit.hasNext()) {
+		while (ltit.hasNext()) {
 			currentList = ltit.next();
 			Element newList = new Element(XMLComponent.XMLCOMPONENT_LIST);
-			newList.setAttribute(ListT.LISTT_ATTRIBUT_NAME, currentList.getListName());
-			newList.setAttribute(ListT.LISTT_ATTRIBUT_OPEN, String.valueOf(currentList.isOpen()));
-			
+			newList.setAttribute(ListT.LISTT_ATTRIBUT_NAME,
+					currentList.getListName());
+			newList.setAttribute(ListT.LISTT_ATTRIBUT_OPEN,
+					String.valueOf(currentList.isOpen()));
+
 			ListIterator<Task> ltk = currentList.iterator();
 			Task currentTask;
-			while(ltk.hasNext()) {
+			while (ltk.hasNext()) {
 				currentTask = ltk.next();
 				Element newTask = new Element(XMLComponent.XMLCOMPONENT_TASK);
-				newTask.setAttribute(Task.TASK_ATTRIBUT_NAME, currentTask.getTaskName());
-				newTask.setAttribute(Task.TASK_ATTRIBUT_CHECKED, String.valueOf(currentTask.isChecked()));
+				newTask.setAttribute(Task.TASK_ATTRIBUT_NAME,
+						currentTask.getTaskName());
+				newTask.setAttribute(Task.TASK_ATTRIBUT_CHECKED,
+						String.valueOf(currentTask.isChecked()));
 				newList.addContent(newTask);
 			}
-			
+
 			root.addContent(newList);
 		}
 		try {
-            XMLOutputter xmlop = new XMLOutputter (Format.getPrettyFormat());
-            xmlop.output(doc, new FileOutputStream(fileName));
-        } catch (IOException e) {}
+			XMLOutputter xmlop = new XMLOutputter(Format.getPrettyFormat());
+			xmlop.output(doc, new FileOutputStream(fileName));
+		} catch (IOException e) {
+		}
 	}
-	
+
 	public static void main(String[] args) {
+		System.out.println("on pas");
 		ListBackup lb = ListBackup.getInstance();
 		ListManager manager = ListManager.getInstance();
 		try {
@@ -168,8 +180,8 @@ public class ListBackup {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*System.out.println(manager);*/
+		/* System.out.println(manager); */
 		lb.saveListToFile("save.xml");
 	}
-	
+
 }
