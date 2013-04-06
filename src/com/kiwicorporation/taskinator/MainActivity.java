@@ -58,7 +58,6 @@ public class MainActivity extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						MainActivity.this);
 				builder.setTitle("Add list");
-				// builder.setMessage("What is the new name?");
 
 				// Use an EditText view to get user input.
 				final EditText input = new EditText(MainActivity.this);
@@ -100,13 +99,7 @@ public class MainActivity extends Activity {
 		// Save in XML File
 		FileOutputStream file;
 		try {
-			boolean i = deleteFile(FILESAVE);
-			System.out.println("file deleted:" + i);
-			String[] fs = fileList();
-			System.out.println("Taille nb " + fs.length);
-			for (String s : fs) {
-				System.out.println(s);
-			}
+			deleteFile(FILESAVE);
 			file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
 			ListBackup.getInstance().saveListToFile(file);
 			file.close();
