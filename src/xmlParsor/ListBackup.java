@@ -46,7 +46,7 @@ public class ListBackup {
 		return ListBackupHolder.instance;
 	}
 
-	public List<ListT> getListFromInpuStream(InputStream file)
+	public List<ListT> getListFromInputStream(InputStream file)
 			throws TaskException, ListTException {
 		List<ListT> listOfList = ListManager.getInstance().getLists();
 
@@ -135,7 +135,7 @@ public class ListBackup {
 		}
 	}
 
-	public void saveListToFile(String fileName, FileOutputStream file) {
+	public void saveListToFile(FileOutputStream file) {
 		Element root = new Element("backup");
 		Document doc = new Document(root);
 
@@ -165,7 +165,7 @@ public class ListBackup {
 		}
 		try {
 			XMLOutputter xmlop = new XMLOutputter(Format.getPrettyFormat());
-			xmlop.output(doc, /* new FileOutputStream(fileName) */file);
+			xmlop.output(doc, file);
 		} catch (IOException e) {
 		}
 	}

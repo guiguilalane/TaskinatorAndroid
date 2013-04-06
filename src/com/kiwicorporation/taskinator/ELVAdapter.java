@@ -21,10 +21,10 @@ import controleur.ListManager;
 
 /*
  * TODO:
- * Drag and drop pour dŽplacer une t‰che
  * Quand on dŽroule une liste se mettre ˆ la position ou on dŽroule et non ˆ la fin quand la liste est plus grande que l'Žcran idem quand on ajoute/delete/modify
-
- * Toast --> Delete / Modify / Add
+ * Drag and drop pour dŽplacer une t‰che
+ * 
+ * Toast --> Delete / Modify / Add ?
  * 
  * Voir pour le style / padding / taille bouton ... 
  * Menu contextuel (ˆ voir)

@@ -34,8 +34,10 @@ public class MainActivity extends Activity {
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
 		try {
 			FileInputStream file = this.openFileInput(FILESAVE);
+			ListManager.getInstance().removeAllList();
 			ListManager.getInstance().setListOfList(
-					ListBackup.getInstance().getListFromInpuStream(file));
+					ListBackup.getInstance().getListFromInputStream(file));
+			file.close();
 		} catch (TaskException e) {
 			e.printStackTrace();
 		} catch (ListTException e) {
@@ -95,13 +97,23 @@ public class MainActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		System.out.println("on passe pause");
 		// Save in XML File
 		FileOutputStream file;
 		try {
+			boolean i = deleteFile(FILESAVE);
+			System.out.println("file deleted:" + i);
+			String[] fs = fileList();
+			System.out.println("Taille nb " + fs.length);
+			for (String s : fs) {
+				System.out.println(s);
+			}
 			file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
-			ListBackup.getInstance().saveListToFile("bjhb", file);
+			ListBackup.getInstance().saveListToFile(file);
+			file.close();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
