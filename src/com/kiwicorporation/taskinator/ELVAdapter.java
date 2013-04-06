@@ -350,7 +350,6 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 										ListManager.getInstance()
 												.removeListFromIndex(
 														groupPosition);
-										// groupes.remove(groupPosition);
 										notifyDataSetChanged();
 										Toast.makeText(
 												context,
