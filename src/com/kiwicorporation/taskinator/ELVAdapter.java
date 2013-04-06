@@ -24,7 +24,7 @@ import controleur.ListManager;
  * Save data when app was quit
  * Drag and drop pour déplacer une tâche
  * Quand on déroule une liste se mettre à la position ou on déroule et non à la fin quand la liste est plus grande que l'écran idem quand on ajoute/delete/modify
- * Voir pour remmetre le list Manager
+
  * Est-ce qu'on laisse les toast si oui pour lesquel add modify supp ?????
  * 
  * Voir pour le style / padding / taille bouton ... 

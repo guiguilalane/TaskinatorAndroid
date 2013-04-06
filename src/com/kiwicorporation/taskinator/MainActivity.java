@@ -2,6 +2,9 @@ package com.kiwicorporation.taskinator;
 
 import model.ListT;
 import model.Task;
+import modelException.ListTException;
+import modelException.TaskException;
+import xmlParsor.ListBackup;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,15 +27,21 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
+		// Charge the XML file in ListManger --> Maybe in onResume too ?
+		try {
+			ListManager.getInstance().setListOfList(
+					ListBackup.getInstance().getListFromFile("save.xml"));
+		} catch (TaskException e) {
+			e.printStackTrace();
+		} catch (ListTException e) {
+			e.printStackTrace();
+		}
 
 		for (int i = 1; i < 5; i++) {
-
 			ListT groupe = new ListT("Liste " + i, i == 2);
-
 			for (int x = 1; x < 4; x++) {
 				groupe.addTask(new Task("Task " + x, true));
 			}
-
 			ListManager.getInstance().addList(groupe);
 		}
 
@@ -82,6 +91,13 @@ public class MainActivity extends Activity {
 				modifyDialog.show();
 			}
 		});
+	}
+
+	@Override
+	public void onPause() {
+		ListBackup.getInstance().saveListToFile("save.xml");
+		// Sauvegarde dans XML
+
 	}
 
 	@Override
