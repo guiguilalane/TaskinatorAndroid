@@ -15,6 +15,7 @@ public class ListManager implements Iterable<ListT>{
 		listOfList = new LinkedList<ListT>();
 	}
 	
+	@Override
 	public ListIterator<ListT> iterator() {
 		return listOfList.listIterator();
 	}
@@ -59,6 +60,7 @@ public class ListManager implements Iterable<ListT>{
 		return listOfList.get(pos);
 	}
 	
+	@Override
 	public String toString() {
 		
 		String s = "";
