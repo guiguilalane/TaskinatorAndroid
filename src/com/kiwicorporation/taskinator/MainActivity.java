@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import model.ListT;
 import model.Task;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 
 public class MainActivity extends Activity {
@@ -40,6 +43,9 @@ public class MainActivity extends Activity {
 			groupes.add(groupe);
 		}
 
+		// TODO A voir pour parcours de toute la liste et expand group deja
+		// expanded
+
 		final ELVAdapter adapter = new ELVAdapter(this, groupes);
 
 		expandableList.setAdapter(adapter);
@@ -49,9 +55,40 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				// TODO A configurer pour modifier le nom ...
-				groupes.add(new ListT("Bloup a configuer"));
-				adapter.notifyDataSetChanged();
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MainActivity.this);
+				builder.setTitle("Add list");
+				// builder.setMessage("What is the new name?");
+
+				// Use an EditText view to get user input.
+				final EditText input = new EditText(MainActivity.this);
+				input.setHint("Name of the list");
+				builder.setView(input);
+
+				builder.setPositiveButton("Ok",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								String value = input.getText().toString();
+								groupes.add(new ListT(value));
+								adapter.notifyDataSetChanged();
+							}
+						}).setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.cancel();
+							}
+						});
+				// Create alert dialog
+				AlertDialog modifyDialog = builder.create();
+
+				// Show it
+				modifyDialog.show();
 			}
 		});
 	}

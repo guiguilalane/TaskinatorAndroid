@@ -10,5 +10,9 @@
     <string name="deleteList">Delete list</string>
     <string name="addTask">Add task</string>
     <string name="addList">Add list</string>
+    <string name="modifyTask">Modify task</string>
+    <string name="modifyList">Modify list</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

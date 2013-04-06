@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/idDeleteList"
+        android:layout_toLeftOf="@+id/idModifyList"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="@string/listName"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -22,6 +22,19 @@
     <!-- android:focusable="false" -->
     <!-- android:focusableInTouchMode="false" -->
     <!-- android:hint="@string/taskList" /> -->
+
+    <ImageButton
+        android:id="@id/idModifyList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/idDeleteList"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/modifyList"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/modify" />
 
     <ImageButton
         android:id="@id/idDeleteList"

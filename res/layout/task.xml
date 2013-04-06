@@ -24,9 +24,23 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/idDeleteTask"
+        android:layout_toLeftOf="@+id/idModifyTask"
         android:layout_toRightOf="@id/idCheckbox"
         android:text="@string/taskName" />
+    
+        <ImageButton
+        android:id="@id/idModifyTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/idNameTask"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/idDeleteTask"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/modifyTask"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/modify" />
 
     <ImageButton
         android:id="@id/idDeleteTask"

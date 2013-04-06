@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +23,20 @@ import android.widget.Toast;
  * TODO:
  * Save wich list is expanded or not
  * Save data when app was quit
- * Modify a list (menu or EditText)
- * Add List and task
  * Drag and drop pour déplacer une tâche
  * Quand on déroule une liste se mettre à la position ou on déroule et non à la fin quand la liste est plus grande que l'écran
+ * 
+ * Est-ce qu'on laisse les toast si oui pour lesquel add modify supp ?????
+ * 
+ * Voir pour le style / padding / taille bouton ... 
+ * Menu contextuel (à voir)
+ * 
+ * NOTE:
+ * Revoir pour la façon dont est corriger le bug du bouton plus 
+ * Revoir pour Add/Delete/Modify un moyen de créer les boites de dialog à part (dans une autre classe) Refractor
+ * 
+ * FIXME:
  * Supprimer tous les todo et sysout
- * Ajouter le plus dans les child (Exception retournée quand on déroule la première après la deuxième)
- * Voir pour le style padding ... 
  */
 
 public class ELVAdapter extends BaseExpandableListAdapter {
@@ -74,6 +82,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 					.findViewById(R.id.idCheckbox);
 			childViewHolder.textViewChild = (TextView) convertView
 					.findViewById(R.id.idNameTask);
+			childViewHolder.modifyButtonChild = (ImageButton) convertView
+					.findViewById(R.id.idModifyTask);
 			childViewHolder.deleteButtonChild = (ImageButton) convertView
 					.findViewById(R.id.idDeleteTask);
 
@@ -93,6 +103,56 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 						}
 					});
 			childViewHolder.textViewChild.setText(objet.getTaskName());
+
+			childViewHolder.modifyButtonChild.setFocusable(false);
+			childViewHolder.modifyButtonChild.setFocusableInTouchMode(false);
+			childViewHolder.modifyButtonChild
+					.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									context);
+							builder.setTitle("Modify task");
+							builder.setMessage("What is the new name of the task?");
+
+							// Use an EditText view to get user input.
+							final EditText input = new EditText(context);
+							input.setText(objet.getTaskName());
+							builder.setView(input);
+
+							builder.setPositiveButton("Ok",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int whichButton) {
+											String value = input.getText()
+													.toString();
+											objet.setTaskName(value);
+											notifyDataSetChanged();
+										}
+									}).setNegativeButton("Cancel",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.cancel();
+										}
+									});
+							// Create alert dialog
+							AlertDialog modifyDialog = builder.create();
+
+							// Show it
+							modifyDialog.show();
+							Toast.makeText(context,
+									"Modify " + objet.getTaskName(),
+									Toast.LENGTH_SHORT).show();
+						}
+					});
 
 			childViewHolder.deleteButtonChild.setFocusable(false);
 			childViewHolder.deleteButtonChild.setFocusableInTouchMode(false);
@@ -133,9 +193,44 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 						@Override
 						public void onClick(View v) {
-							((ListT) getGroup(groupPosition)).addTask(new Task(
-									"task!!!!!"));
-							notifyDataSetChanged();
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									context);
+							builder.setTitle("Add task");
+							// builder.setMessage("What is the new name?");
+
+							// Use an EditText view to get user input.
+							final EditText input = new EditText(context);
+							input.setHint("Name of the task");
+							builder.setView(input);
+
+							builder.setPositiveButton("Ok",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int whichButton) {
+											String value = input.getText()
+													.toString();
+											((ListT) getGroup(groupPosition))
+													.addTask(new Task(value));
+											notifyDataSetChanged();
+										}
+									}).setNegativeButton("Cancel",
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											dialog.cancel();
+										}
+									});
+							// Create alert dialog
+							AlertDialog modifyDialog = builder.create();
+
+							// Show it
+							modifyDialog.show();
 						}
 					});
 
@@ -170,7 +265,6 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		GroupViewHolder gholder;
 
 		final ListT group = (ListT) getGroup(groupPosition);
-
 		if (convertView == null) {
 			gholder = new GroupViewHolder();
 
@@ -178,6 +272,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 			gholder.textViewGroup = (TextView) convertView
 					.findViewById(R.id.idNameList);
+			gholder.modifyButtonGroup = (ImageButton) convertView
+					.findViewById(R.id.idModifyList);
 			gholder.deleteButtonGroup = (ImageButton) convertView
 					.findViewById(R.id.idDeleteList);
 
@@ -187,6 +283,47 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		}
 
 		gholder.textViewGroup.setText(group.getListName());
+		gholder.modifyButtonGroup.setFocusable(false);
+		gholder.modifyButtonGroup.setFocusableInTouchMode(false);
+		gholder.modifyButtonGroup.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle("Modify list");
+				builder.setMessage("What is the new name of the new list?");
+
+				// Use an EditText view to get user input.
+				final EditText input = new EditText(context);
+				input.setText(group.getListName());
+				builder.setView(input);
+
+				builder.setPositiveButton("Ok",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								String value = input.getText().toString();
+								group.setListName(value);
+								notifyDataSetChanged();
+							}
+						}).setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.cancel();
+							}
+						});
+				// Create alert dialog
+				AlertDialog modifyDialog = builder.create();
+
+				// Show it
+				modifyDialog.show();
+			}
+		});
 		gholder.deleteButtonGroup.setFocusable(false);
 		gholder.deleteButtonGroup.setFocusableInTouchMode(false);
 		gholder.deleteButtonGroup.setOnClickListener(new OnClickListener() {
@@ -247,14 +384,26 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		return true;
 	}
 
+	@Override
+	public void onGroupCollapsed(int groupPosition) {
+		groupes.get(groupPosition).setOpen(false);
+	}
+
+	@Override
+	public void onGroupExpanded(int groupPosition) {
+		groupes.get(groupPosition).setOpen(true);
+	}
+
 	class GroupViewHolder {
 		public TextView textViewGroup;
+		public ImageButton modifyButtonGroup;
 		public ImageButton deleteButtonGroup;
 	}
 
 	class ChildViewHolder {
 		public CheckBox checkboxChild;
 		public TextView textViewChild;
+		public ImageButton modifyButtonChild;
 		public ImageButton deleteButtonChild;
 	}
 
