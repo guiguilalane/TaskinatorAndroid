@@ -7,7 +7,7 @@
         android:id="@+id/idCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:layout_centerVertical="true" />
 
     <!-- <EditText -->
