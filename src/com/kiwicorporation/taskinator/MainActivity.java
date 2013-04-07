@@ -2,12 +2,10 @@ package com.kiwicorporation.taskinator;
 
 import java.io.IOException;
 
-import xmlParsor.ListBackup;
-import controleur.ListManager;
 import model.ListT;
-import model.Task;
 import modelException.ListTException;
 import modelException.TaskException;
+import xmlParsor.ListBackup;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import controleur.ListManager;
 
 
 public class MainActivity extends Activity {
