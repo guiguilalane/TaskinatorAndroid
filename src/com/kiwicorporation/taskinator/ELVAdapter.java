@@ -21,11 +21,13 @@ import controleur.ListManager;
 
 /*
  * TODO:
- * Save data when app was quit
- * Drag and drop pour dŽplacer une t‰che
  * Quand on dŽroule une liste se mettre ˆ la position ou on dŽroule et non ˆ la fin quand la liste est plus grande que l'Žcran idem quand on ajoute/delete/modify
-
- * Est-ce qu'on laisse les toast si oui pour lesquel add modify supp ?????
+ * 	--> Essai avec elv.setSelectedGroup(groupPosition); dans onGroupExpanded() mais a marche pas trs bien 
+ *	--> Idem quand on ajoute tache ... garder focus sur l'endroit ou on a fait l'action 
+ *
+ * Drag and drop pour dŽplacer une t‰che
+ * 
+ * Toast --> Delete / Modify / Add ?
  * 
  * Voir pour le style / padding / taille bouton ... 
  * Menu contextuel (ˆ voir)
@@ -390,11 +392,13 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	@Override
 	public void onGroupCollapsed(int groupPosition) {
 		ListManager.getInstance().getList(groupPosition).setOpen(false);
+		elv.setSelectedGroup(groupPosition);
 	}
 
 	@Override
 	public void onGroupExpanded(int groupPosition) {
 		ListManager.getInstance().getList(groupPosition).setOpen(true);
+		elv.setSelectedGroup(groupPosition);
 	}
 
 	class GroupViewHolder {
