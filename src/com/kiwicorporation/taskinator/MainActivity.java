@@ -32,19 +32,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
-		try {
-			FileInputStream file = this.openFileInput(FILESAVE);
-			ListManager.getInstance().removeAllList();
-			ListManager.getInstance().setListOfList(
-					ListBackup.getInstance().getListFromInputStream(file));
-			file.close();
-		} catch (TaskException e) {
-			e.printStackTrace();
-		} catch (ListTException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		restore(savedInstanceState);
 
 		final ELVAdapter adapter = new ELVAdapter(this, expandableList);
 
@@ -93,7 +81,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	@Override
+	/*@Override
 	public void onPause() {
 		super.onPause();
 		// Save in XML File
@@ -110,6 +98,46 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}*/
+	
+	@Override
+	public void onSaveInstanceState(Bundle outstate) {
+		super.onSaveInstanceState(outstate);
+		
+		//Whether there is no list, no need to save something
+		if(!ListManager.getInstance().getLists().isEmpty()) {
+			FileOutputStream file;
+			try {
+				deleteFile(FILESAVE);
+				file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
+				ListBackup.getInstance().saveListToFile(file);
+				file.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void restore(Bundle state) {
+		try {
+			FileInputStream file = this.openFileInput(FILESAVE);
+			ListManager.getInstance().removeAllList();
+			System.out.println(ListManager.getInstance());
+			ListManager.getInstance().setListOfList(
+					ListBackup.getInstance().getListFromInputStream(file));
+			file.close();
+		} catch (TaskException e) {
+			e.printStackTrace();
+		} catch (ListTException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
