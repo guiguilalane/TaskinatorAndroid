@@ -126,7 +126,6 @@ public class MainActivity extends Activity {
 		try {
 			FileInputStream file = this.openFileInput(FILESAVE);
 			ListManager.getInstance().removeAllList();
-			System.out.println(ListManager.getInstance());
 			ListManager.getInstance().setListOfList(
 					ListBackup.getInstance().getListFromInputStream(file));
 			file.close();
