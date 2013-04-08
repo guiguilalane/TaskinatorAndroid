@@ -62,9 +62,6 @@ public class ListManager implements Iterable<ListT> {
 
 	public void removeAllList() {
 		listOfList.clear();
-/*		for (int i = 0; i < listOfList.size(); ++i) {
-			removeListFromIndex(i);
-		}*/
 	}
 
 	@Override

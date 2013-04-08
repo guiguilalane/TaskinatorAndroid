@@ -16,8 +16,9 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Sc\IeC {\'e}nario 1 - Cr\IeC {\'e}ation/Utilisation/Suppression d'une liste}{4}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Sc\IeC {\'e}nario 2 - Gestion des listes et sauvegarde}{4}{subsubsection.3.2.2}
 \contentsline {section}{\numberline {4}L'IHM}{5}{section.4}
-\contentsline {subsubsection}{\numberline {4.0.3}Choix r\IeC {\'e}alis\IeC {\'e}s (Gestures, ...)}{5}{subsubsection.4.0.3}
+\contentsline {subsubsection}{\numberline {4.0.3}Choix r\IeC {\'e}alis\IeC {\'e}s (Position des boutons, Gestures, ...)}{5}{subsubsection.4.0.3}
 \contentsline {subsection}{\numberline {4.1}Affichage des listes et t\IeC {\^a}ches}{5}{subsection.4.1}
 \contentsline {section}{\numberline {5}Le mod\IeC {\`e}le}{6}{section.5}
-\contentsline {section}{\numberline {6}Limite de l'application}{7}{section.6}
-\contentsline {section}{\numberline {7}Conclusion g\IeC {\'e}n\IeC {\'e}rale}{8}{section.7}
+\contentsline {section}{\numberline {6}Sauvegarde des donn\IeC {\'e}es}{7}{section.6}
+\contentsline {section}{\numberline {7}Limite de l'application}{8}{section.7}
+\contentsline {section}{\numberline {8}Conclusion g\IeC {\'e}n\IeC {\'e}rale}{9}{section.8}
