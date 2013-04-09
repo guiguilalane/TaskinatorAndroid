@@ -395,13 +395,11 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 	@Override
 	public void onGroupCollapsed(int groupPosition) {
 		ListManager.getInstance().getList(groupPosition).setOpen(false);
-		elv.setSelectedGroup(groupPosition);
 	}
 
 	@Override
 	public void onGroupExpanded(int groupPosition) {
 		ListManager.getInstance().getList(groupPosition).setOpen(true);
-		elv.setSelectedGroup(groupPosition);
 	}
 
 	class GroupViewHolder {

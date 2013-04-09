@@ -33,7 +33,27 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		expandableList = (ExpandableListView) findViewById(R.id.expandableView);
-		restore(savedInstanceState);
+		// restore(savedInstanceState);
+		FileInputStream file;
+		try {
+			file = this.openFileInput(FILESAVE);
+			ListManager.getInstance().removeAllList();
+			ListManager.getInstance().setListOfList(
+					ListBackup.getInstance().getListFromInputStream(file));
+			file.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TaskException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ListTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		final ELVAdapter adapter = new ELVAdapter(this, expandableList);
 
@@ -138,22 +158,6 @@ public class MainActivity extends Activity {
 			ListBackup.getInstance().saveListToFile(file);
 			file.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void restore(Bundle state) {
-		try {
-			FileInputStream file = this.openFileInput(FILESAVE);
-			ListManager.getInstance().removeAllList();
-			ListManager.getInstance().setListOfList(
-					ListBackup.getInstance().getListFromInputStream(file));
-			file.close();
-		} catch (TaskException e) {
-			e.printStackTrace();
-		} catch (ListTException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -8,9 +8,7 @@
         android:id="@+id/expandableView"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/idBottomBar"
-        android:focusableInTouchMode="true"
-        android:transcriptMode="alwaysScroll" >
+        android:layout_above="@+id/idBottomBar" >
     </ExpandableListView>
 
     <LinearLayout
