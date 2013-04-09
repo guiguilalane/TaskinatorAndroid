@@ -27,8 +27,14 @@
         <Button
             android:id="@+id/idAddList"
             android:layout_width="fill_parent"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:text="@string/addList" />
+        <Button android:id="@+id/idClearAllLists"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="@string/clearAllLists"/>
     </LinearLayout>
 
 </RelativeLayout>

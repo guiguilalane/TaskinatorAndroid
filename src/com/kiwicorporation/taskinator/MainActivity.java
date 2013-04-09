@@ -79,33 +79,34 @@ public class MainActivity extends Activity {
 				modifyDialog.show();
 			}
 		});
+
+		Button clearAllListsButton = (Button) findViewById(R.id.idClearAllLists);
+		clearAllListsButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				ListManager.getInstance().removeAllList();
+				adapter.notifyDataSetChanged();
+			}
+		});
 	}
 
-	/*@Override
-	public void onPause() {
-		super.onPause();
-		// Save in XML File
-		FileOutputStream file;
-		try {
-			deleteFile(FILESAVE);
-			file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
-			ListBackup.getInstance().saveListToFile(file);
-			file.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
+	/*
+	 * @Override public void onPause() { super.onPause(); // Save in XML File
+	 * FileOutputStream file; try { deleteFile(FILESAVE); file =
+	 * openFileOutput(FILESAVE, Context.MODE_PRIVATE);
+	 * ListBackup.getInstance().saveListToFile(file); file.close(); } catch
+	 * (FileNotFoundException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); } }
+	 */
+
 	@Override
 	public void onSaveInstanceState(Bundle outstate) {
 		super.onSaveInstanceState(outstate);
-		
-		//Whether there is no list, no need to save something
-		if(!ListManager.getInstance().getLists().isEmpty()) {
+
+		// Whether there is no list, no need to save something
+		if (!ListManager.getInstance().getLists().isEmpty()) {
 			FileOutputStream file;
 			try {
 				deleteFile(FILESAVE);
@@ -121,7 +122,7 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
-	
+
 	public void restore(Bundle state) {
 		try {
 			FileInputStream file = this.openFileInput(FILESAVE);
@@ -136,7 +137,7 @@ public class MainActivity extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
