@@ -229,6 +229,7 @@ Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle li
 \item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu.
 \item \textbf{Fonctionnalité \textit{Modifier}:} nous avons choisi d'ajouter cette possibilité de modification du nom sur chaque élément par la présence d'un bouton.
 \item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. 
+%TODO Ajouter fonctionnalité supprimer all lists
 %TODO A revoir
 Pour plus de sécurité, le focus de la validation de la suppression est par défaut sur \textit{Non}. %TODO A revoir si on a un focus sur android
 %TODO A revoir si on garde
@@ -250,6 +251,8 @@ L'application est tout simplement composée d'une zone réservée à l'affichage
 Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et chacune d'entre elle sa ou ses tâche(s).
 La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
 La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un TextView permettant de taper d'afficher le nom de la tâche, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom sur la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
+
+%TODO --> Liste ouvertes ou non sauvegardée --> Rapport
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 4

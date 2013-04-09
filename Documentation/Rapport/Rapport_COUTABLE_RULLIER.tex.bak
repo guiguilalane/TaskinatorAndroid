@@ -179,7 +179,7 @@ Voici les fonctionnalités secondaires:
 \newpage
 \section{Storyboard, \paperPrototyping et Scénarios}
 
-%TODO A voir si on garde le storyboard
+%TODO A voir si on garde le storyboard--> En refaire un
 \subsection{Storyboard}
 Le storyboard permet de montrer à quoi sert l'application. Il utilise les star people de Bill VerPlank. A la fin su storyboard, le personnage atteint son but et est satisfait. Nous avons donc ici créé notre storyboard pour notre application:
 \begin{figure}[H]
@@ -219,12 +219,10 @@ Ce scénario permet de créer des listes et de les modifiers. Il permet aussi de
 \newpage
 \section{L'IHM}
 
-\subsubsection{Choix réalisés (Gestures, ...)}
+\subsubsection{Choix réalisés (Position des boutons, Gestures, ...)}
 Dans cette section, nous expliquons les choix effectués et pourquoi nous avons choisi de mettre en place ces solutions:
 
 \begin{itemize}
-%TODO A voir est-ce qu'on fait un bouton plus pour les listes et pour les taches on clique sur un champs
-%TODO Modifier tout le paragraphe
 \item \textbf{Fonctionnalité de création de liste:} nous avons choisi de créer de nouvelles listes en cliquant sur le bouton "Add list" en bas de l'écran.
 Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle liste. L'utilisateur doit ensuite valider en cliquant sur "OK", s'il appui sur "Cancel", la nouvelle liste ne sera pas créée. Un nouvel item apparaît sur la page. Un nouveau bouton "+" apparaît dans cette liste, il permettra de créer de nouvelles tâches pour la liste.
 \item \textbf{Fonctionnalité de création de tâche:} nous avons choisi de créer de nouvelles tâches en cliquant sur le bouton "+" présent sous chaque liste pour ajouter une tâche à la liste correspondante. Lorsque l'utilisateur clique sur ce bouton, une nouvelle boite de dialogue apparaît et permet de rentrer le nouveau nom de la tâche. L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+"). Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
@@ -237,7 +235,7 @@ Pour plus de sécurité, le focus de la validation de la suppression est par dé
 %\item \textbf{Fonctionnalité \textit{Paramètre}:} nous avons décidé pour cette fonctionnalité (qui peut entraîner la suppression de différents éléments) de faire, également, apparaître une fenêtre d'avertissement. Dans cette fenêtre le focus de la validation du changement est mise à \textit{Non}. On perd cependant un peu de vitesse d'exécution (si l'utilisateur souhaite effectivement bien effectuer ce changement) au profit de plus de sécurité.
 \end{itemize}
 
-%TODO a compléter
+%TODO a compléter capture écran
 L'application est tout simplement composée d'une zone réservée à l'affichage de la liste en cours de création et d'une bar d'action.
 \begin{figure}[H]
 %    \center
@@ -252,6 +250,8 @@ L'application est tout simplement composée d'une zone réservée à l'affichage
 Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et chacune d'entre elle sa ou ses tâche(s).
 La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
 La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un TextView permettant de taper d'afficher le nom de la tâche, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom sur la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
+
+%TODO --> Liste ouvertes ou non sauvegardée --> Rapport
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 4
@@ -285,7 +285,7 @@ Nous devons donc maintenant restaurer cette liste à partir du fichier (que nous
 \end{figure}
 
 Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer notre propre parseur.
-%TODO GUillaume explication sauvegarde grâce au parseur
+%TODO Guillaume explication sauvegarde grâce au parseur
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
