@@ -13,28 +13,29 @@
         android:transcriptMode="alwaysScroll" >
     </ExpandableListView>
 
-    <!-- style="?android:attr/buttonBarStyle" -->
-
     <LinearLayout
         android:id="@id/idBottomBar"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
-        <!-- style="?android:attr/buttonBarButtonStyle" -->
-
         <Button
             android:id="@+id/idAddList"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
-            android:layout_weight="0.5"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="@string/addList" />
-        <Button android:id="@+id/idClearAllLists"
+
+        <Button
+            android:id="@+id/idClearAllLists"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
-            android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:text="@string/clearAllLists"/>
+            android:layout_weight="0.5"
+            android:text="@string/clearAllLists" />
     </LinearLayout>
 
 </RelativeLayout>

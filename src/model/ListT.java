@@ -82,7 +82,7 @@ public class ListT implements Iterable<Task> {
 	}
 
 	/**
-	 * @return the list af all task in the task list
+	 * @return the list of all task in the task list
 	 */
 	public List<Task> getTaskList() {
 		return taskList;
@@ -109,7 +109,7 @@ public class ListT implements Iterable<Task> {
 	/**
 	 * @param taskToRemove
 	 *            the task from the task list
-	 * @return whethet the task was removed from the task list
+	 * @return whether the task was removed from the task list
 	 */
 	public boolean removeTask(Task taskToRemove) {
 		return taskList.remove(taskToRemove);
@@ -122,6 +122,16 @@ public class ListT implements Iterable<Task> {
 	 */
 	public Task removeTaskFromIndex(int pos) {
 		return taskList.remove(pos);
+	}
+
+	public int nbTaskChecked() {
+		int nbChecked = 0;
+		for (Task t : taskList) {
+			if (t.isChecked()) {
+				nbChecked++;
+			}
+		}
+		return nbChecked;
 	}
 
 	/*

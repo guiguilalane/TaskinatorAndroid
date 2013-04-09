@@ -27,8 +27,6 @@ import controleur.ListManager;
  *
  * Drag and drop pour dŽplacer une t‰che
  * 
- * Toast --> Delete / Modify / Add ?
- * 
  * Voir pour le style / padding / taille bouton ... 
  * Menu contextuel (ˆ voir)
  * 
@@ -102,6 +100,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 						public void onCheckedChanged(CompoundButton buttonView,
 								boolean isChecked) {
 							objet.setChecked(isChecked);
+							notifyDataSetChanged();
 						}
 					});
 			childViewHolder.textViewChild.setText(objet.getTaskName());
@@ -276,6 +275,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 			gholder.textViewGroup = (TextView) convertView
 					.findViewById(R.id.idNameList);
+			gholder.textViewTaskCheckedGroup = (TextView) convertView
+					.findViewById(R.id.idTaskChecked);
 			gholder.modifyButtonGroup = (ImageButton) convertView
 					.findViewById(R.id.idModifyList);
 			gholder.deleteButtonGroup = (ImageButton) convertView
@@ -287,6 +288,8 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 		}
 
 		gholder.textViewGroup.setText(group.getListName());
+		gholder.textViewTaskCheckedGroup.setText(group.nbTaskChecked() + "/"
+				+ group.getTaskList().size());
 		gholder.modifyButtonGroup.setFocusable(false);
 		gholder.modifyButtonGroup.setFocusableInTouchMode(false);
 		gholder.modifyButtonGroup.setOnClickListener(new OnClickListener() {
@@ -403,6 +406,7 @@ public class ELVAdapter extends BaseExpandableListAdapter {
 
 	class GroupViewHolder {
 		public TextView textViewGroup;
+		public TextView textViewTaskCheckedGroup;
 		public ImageButton modifyButtonGroup;
 		public ImageButton deleteButtonGroup;
 	}

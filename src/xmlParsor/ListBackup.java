@@ -114,7 +114,6 @@ public class ListBackup {
 			}
 			listOfList.add(lt);
 		} else {
-			// TODO: throw Exception
 			throw new ListTException("the xml file had bad format : "
 					+ currentElement.getName() + " tag get, list tag expected.");
 		}
@@ -129,7 +128,6 @@ public class ListBackup {
 							.getAttributeValue(Task.TASK_ATTRIBUT_CHECKED)));
 			lt.addTask(t);
 		} else {
-			// TODO: throw Exception
 			throw new TaskException("The xml file had bad format : "
 					+ currentTask.getName() + " tag get, task tag expected.");
 		}
@@ -169,21 +167,4 @@ public class ListBackup {
 		} catch (IOException e) {
 		}
 	}
-
-	public static void main(String[] args) {
-		ListBackup lb = ListBackup.getInstance();
-		ListManager manager = ListManager.getInstance();
-		try {
-			manager.setListOfList(lb.getListFromFile("test.xml"));
-		} catch (TaskException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ListTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/* System.out.println(manager); */
-		// lb.saveListToFile("save.xml");
-	}
-
 }

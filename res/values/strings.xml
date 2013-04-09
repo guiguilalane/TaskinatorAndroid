@@ -15,7 +15,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="clearAllLists">Clear all lists</string>
-    
-    
+    <string name="taskChecked">0/0</string>
 
 </resources>

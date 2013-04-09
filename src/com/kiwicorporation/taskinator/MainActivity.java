@@ -91,35 +91,20 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	/*
-	 * @Override public void onPause() { super.onPause(); // Save in XML File
-	 * FileOutputStream file; try { deleteFile(FILESAVE); file =
-	 * openFileOutput(FILESAVE, Context.MODE_PRIVATE);
-	 * ListBackup.getInstance().saveListToFile(file); file.close(); } catch
-	 * (FileNotFoundException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } }
-	 */
-
 	@Override
-	public void onSaveInstanceState(Bundle outstate) {
-		super.onSaveInstanceState(outstate);
-
-		// Whether there is no list, no need to save something
-		if (!ListManager.getInstance().getLists().isEmpty()) {
-			FileOutputStream file;
-			try {
-				deleteFile(FILESAVE);
-				file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
-				ListBackup.getInstance().saveListToFile(file);
-				file.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void onPause() {
+		super.onPause();
+		// Save in XML File
+		FileOutputStream file;
+		try {
+			deleteFile(FILESAVE);
+			file = openFileOutput(FILESAVE, Context.MODE_PRIVATE);
+			ListBackup.getInstance().saveListToFile(file);
+			file.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -137,7 +122,6 @@ public class MainActivity extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
