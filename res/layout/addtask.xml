@@ -3,8 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-    
-        <ImageButton
+
+    <ImageButton
         android:id="@+id/idAddTask"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,6 +14,5 @@
         android:focusableInTouchMode="false"
         android:scaleType="fitCenter"
         android:src="@drawable/add" />
-    
 
 </LinearLayout>
