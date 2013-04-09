@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import controleur.ListManager;
 
 public class MainActivity extends Activity {
@@ -85,8 +86,43 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				ListManager.getInstance().removeAllList();
-				adapter.notifyDataSetChanged();
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+						MainActivity.this);
+
+				// Set title
+				alertDialogBuilder.setTitle("Delete all lists ?");
+
+				// Set dialog message
+				alertDialogBuilder
+						.setMessage("You'll lose all your lists!")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int id) {
+										ListManager.getInstance()
+												.removeAllList();
+										adapter.notifyDataSetChanged();
+										Toast.makeText(MainActivity.this,
+												"You delete all lists ",
+												Toast.LENGTH_SHORT).show();
+									}
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
+
+				// Create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+
+				// Show it
+				alertDialog.show();
 			}
 		});
 	}

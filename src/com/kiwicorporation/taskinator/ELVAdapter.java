@@ -27,7 +27,7 @@ import controleur.ListManager;
  *
  * Drag and drop pour déplacer une tâche
  * 
- * Voir pour le style / padding / taille bouton ... 
+ * Voir pour le style / padding 
  * Menu contextuel (à voir)
  * 
  * NOTE:
