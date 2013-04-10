@@ -8,11 +8,9 @@
 \contentsline {paragraph}{Supprimer un \IeC {\'e}l\IeC {\'e}ment:}{3}{section*.4}
 \contentsline {subsection}{\numberline {2.2}Fonctionnalit\IeC {\'e}s secondaires}{3}{subsection.2.2}
 \contentsline {paragraph}{Monter / Descendre:}{3}{section*.5}
-\contentsline {section}{\numberline {3}Storyboard, \emph {paper prototyping}et Sc\IeC {\'e}narios}{4}{section.3}
-\contentsline {subsection}{\numberline {3.1}Storyboard}{4}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Sc\IeC {\'e}narios}{4}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Sc\IeC {\'e}nario 1 - Cr\IeC {\'e}ation/Utilisation/Suppression d'une liste}{4}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Sc\IeC {\'e}nario 2 - Gestion des listes et sauvegarde}{4}{subsubsection.3.2.2}
+\contentsline {section}{\numberline {3}Sc\IeC {\'e}narios}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Sc\IeC {\'e}nario 1 - Cr\IeC {\'e}ation/Utilisation/Suppression d'une liste}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Sc\IeC {\'e}nario 2 - Gestion des listes et sauvegarde}{4}{subsection.3.2}
 \contentsline {section}{\numberline {4}L'IHM}{5}{section.4}
 \contentsline {subsection}{\numberline {4.1}L'activit\IeC {\'e} principale}{5}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Choix r\IeC {\'e}alis\IeC {\'e}s (Position des boutons, Gestures, ...)}{5}{subsubsection.4.1.1}
