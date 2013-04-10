@@ -59,7 +59,9 @@ colorlinks = true, % Colorise les liens
 urlcolor = blue, % Couleur des hyperliens
 linkcolor = black, % Couleur des liens internes
 }
-
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
 \definecolor{grey}{rgb}{0.95,0.95,0.95}
 
 % Language Definitions for Turtle
@@ -80,11 +82,25 @@ frame=single,
 breaklines=true,
 basicstyle=\ttfamily,
 backgroundcolor=\color{grey},
-basicstyle=\scriptsize,
+basicstyle=\ttfamily,
+columns=fullflexible,
+showstringspaces=false,
 keywordstyle=\color{blue},
 commentstyle=\color{green},
 stringstyle=\color{red},
-identifierstyle=\color{blue}
+identifierstyle=\color{blue},
+tabsize=4
+}
+
+\lstdefinelanguage{XML}
+{%
+morestring=[b]",
+morestring=[s]{>}{<},
+morecomment=[s]{<?}{?>},
+stringstyle=\color{black},
+identifierstyle=\color{darkblue},
+keywordstyle=\color{cyan},
+morekeywords={name, open, checked}% list your attributes here
 }
 
 %Definition de la commande pour retirer l'espace devant les ':'
@@ -174,21 +190,11 @@ Voici les fonctionnalités secondaires:
 %%%%%%%%%%  Etape 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Storyboard, \paperPrototyping et Scénarios}
-
-%TODO A voir si on garde le storyboard--> En refaire un
-\subsection{Storyboard}
-Le storyboard permet de montrer à quoi sert l'application. Il utilise les star people de Bill VerPlank. A la fin su storyboard, le personnage atteint son but et est satisfait. Nous avons donc ici créé notre storyboard pour notre application:
-\begin{figure}[H]
-    \center
-%    \includegraphics[width=13.9cm]{Images/storyboard.png}
-    \caption{Le storyboard}
-\end{figure}
-
-\subsection{Scénarios}
+\section{Scénarios}
 Nous avons imaginé différents scénarios d'utilisation de notre application.
-\subsubsection{Scénario 1 - Création/Utilisation/Suppression d'une liste}
-Ce premier scénario permet de créer une liste et d'y ajouté des tâches.
+
+\subsection{Scénario 1 - Création/Utilisation/Suppression d'une liste}
+Ce premier scénario permet de créer une liste et d'y ajouter des tâches.
 \begin{enumerate}
 \item{L'utilisateur crée une liste et lui donne un nom \textit{Ski}.}
 \item{Il crée ensuite une tâche dans cette liste et lui donne un nom \textit{Bonnet}.}
@@ -197,15 +203,17 @@ Ce premier scénario permet de créer une liste et d'y ajouté des tâches.
 \item{L'utilisateur supprime la liste \textit{Ski}. Une popup apparaît pour l'avertir que cette suppression supprimera aussi toutes les tâche de la liste.}
 \end{enumerate}
 
-\subsubsection{Scénario 2 - Gestion des listes et sauvegarde}
-Ce scénario permet de créer des listes et de les modifiers. Il permet aussi de constater que l'état de l'application est sauvegardé.
+\subsection{Scénario 2 - Gestion des listes et sauvegarde}
+Ce scénario permet de créer des listes et de les modifier. Il permet aussi de constater que l'état de l'application est sauvegardé.
 \begin{enumerate}
 \item{L'utilisateur choisit de créer une liste et lui donne un nom \textit{Course}.}
 \item{Il décide ensuite de créer une nouvelle liste et lui donne un nom \textit{Sac de voyage}.}
-\item{Il décide ensuite d'inverser ces deux listes, pour cela il reste longtemps appuyé sur la liste \textit{Sac de voyage} et la glisse un rangplus haut.}
+\item{Il décide ensuite d'inverser ces deux listes, pour cela il reste longtemps appuyé sur la liste \textit{Sac de voyage} et la glisse un rang plus haut.}
 \item{L'utilisateur va ensuite supprimer la liste \textit{Course}.}
-\item{L'utilisateur va ensuite ouvrir une autre application et revenir sur \textit{Taskinator}. Il peut constater que l'application est ouverte avec l'état dans lequel on l'a quittée.}
-\item{Cette fois-ci, l'utilisateur quitte l'application. De même s'il l'a lance à nouveau, celle-ci est ouverte avec le dernier état dans lequel on l'a quittée. C'est à dire que si une liste était ouverte ou fermée quand on a quitté l'application, celle-ci sera dans le même état quand on y reviendra.}
+\item{L'utilisateur va ensuite ouvrir une autre application et revenir sur \textit{Taskinator}. Il peut constater que l'application est ouverte avec l'état dans lequel on l'a quittée. C'est à dire que si une liste était ouverte ou fermée quand on a quitté l'application, celle-ci sera dans le même état quand on y reviendra.}
+\item{L'utilisateur décide de créer une nouvelle tâche dans \textit{Sac de voyage}. Pendant qu'il entre le nouveau nom de cette tâche, il va recevoir un appel. Lorsque l'appel est terminé, il sera automatiquement redirigé vers Taskinator exactement dans le même état qu'avant l'appel. S'il avait commencé à taper \textit{Chauss}, il retrouvera le même début de mot.}
+\item{L'utilisateur va recevoir un appel pendant qu'il est en train de rentrer un nom pour sa liste}
+\item{Cette fois-ci, l'utilisateur quitte l'application. De même s'il l'a lance à nouveau, celle-ci est ouverte avec le dernier état dans lequel on l'a quittée.}
 \end{enumerate}
 
 
@@ -245,10 +253,10 @@ Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle li
     \caption{Ajout d'une tâche}
 \end{figure}
 L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+"). Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
-\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu. (Fonctionnalitée non implémentée mais expérimentée voir \ref{experimentation}).
+\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu. (Fonctionnalité non implémentée mais expérimentée voir \ref{experimentation}).
 \item \textbf{Fonctionnalité \textit{Modifier}:} nous avons choisi d'ajouter cette possibilité de modification du nom sur chaque élément par la présence du bouton \includegraphics[width=0.5cm]{Images/modify.png}.
 \item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément (liste ou tâche) pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. Le bouton représentant cette fonctionnalité est le suivant \includegraphics[width=0.5cm]{Images/trash_empty.png}
-\item \textbf{Fonctionnalité \textit{Supprimer tout}:} nous avons choisi d'ajouter cette possibilité de supprimer l'ensemble des listes crées par l'utilisateur afin que celui-ci n'est pas à supprimer toutes les tâches une par une s'il souhaite vraiment tout supprimer. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression de l'ensemble des listes est une opération importante.
+\item \textbf{Fonctionnalité \textit{Supprimer tout}:} nous avons choisi d'ajouter cette possibilité de supprimer l'ensemble des listes créées par l'utilisateur afin que celui-ci n'ait pas à supprimer toutes les tâches une par une s'il souhaite vraiment tout supprimer. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression de l'ensemble des listes est une opération importante.
 \item \textbf{Indicateur:} nous avons choisi d'ajouter sur la liste un indicateur permettant de connaître le nombre de tâches validées sur le nombre de tâche de la liste, afin que l'utilisateur puisse voir l'état de sa liste plus rapidement.
 \begin{figure}[H]
     \center
@@ -259,7 +267,7 @@ L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâch
 \end{itemize}
 
 \subsection{Affichage des listes et tâches}
-Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et pour chacune d'entre elle sa ou ses tâche(s).
+Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décidé d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et pour chacune d'entre elle sa ou ses tâche(s).
 
 La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un autre TextView permettant d'afficher le nombre de tâches validées sur le nombre de tâche de la liste, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
 
@@ -279,25 +287,35 @@ Afin de réaliser cette application nous nous sommes basés sur le modèle suiva
 
 Le modèle de cette application est très simple. Il est composé de deux classes, \textit{ListT} et \textit{Task}.
 Nous avons donc ici une \textit{ListT} qui va pouvoir contenir un ensemble de tâches et d'autres propriétés comme le nom et si elle est ouverte ou non. Nous avons de plus une \textit{Task} qui va elle représenter une tâche et contenir certaines informations comme son nom et si elle est cochée ou non.
-Nous pouvons donc gérer tous ces listes au sein de ce modèle et ainsi, ajouter une tâche dans celle-ci. On peut pour les listes comme les tâches les supprimer, les déplacer d'un rang (dans les deux sens).
+Nous pouvons donc gérer toutes ces listes au sein de ce modèle et ainsi, ajouter une tâche dans celle-ci. On peut pour les listes comme les tâches les supprimer, les déplacer d'un rang (dans les deux sens).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Sauvegarde des données}
-Afin que l'utilisateur retrouve l'ensemble de ses données quand il quitte l'application, ou qu'il tourne son téléphone et que l'orientation change, ou qu'il reçoive un appel pendant qu'il utilise l'application; il a été nécessaire de sauvegarder ses données. Pour cela, nous avons décider d'utiliser l'Internal Storage. Celui-ci permet de stocker en interne des fichiers sur l'appareil et que ces fichiers soit privés pour notre application. Ces fichiers seront supprimés lors de la désinstallation de l'application par l'utilisateur.
+Afin que l'utilisateur retrouve l'ensemble de ses données quand il quitte l'application, ou qu'il tourne son téléphone et que l'orientation change, ou qu'il reçoive un appel pendant qu'il utilise l'application; il a été nécessaire de sauvegarder ses données. Pour cela, nous avons décidé d'utiliser l'Internal Storage. Celui-ci permet de stocker en interne des fichiers sur l'appareil et que ces fichiers soient privés pour notre application. Ces fichiers seront supprimés lors de la désinstallation de l'application par l'utilisateur.
 
 Nous avons donc décidé de sauvegarder notre liste dans un fichier \emph{xml} et de la restaurer via ce ficher. Cette sauvegarde s'effectue dans la fonction \emph{onPause()}. Comme on peut le voir sur le schéma ci-dessous, dès que l'activité n'est plus au premier plan, elle passe par la fonction \emph{onPause()}. On est donc sûr d'avoir la dernière version de la liste enregistrée.
 Nous devons donc maintenant restaurer cette liste à partir du fichier (que nous avons décidé d'appeler \textit{save.xml}). Nous avons décidé d'effectuer cette restauration dans la fonction \emph{onCreate()}. En effet à chaque nouveau lancement de l'application, on recharge la liste à partir du fichier \textit{save.xml}.
 \begin{figure}[htpb]
 	\center
-	\includegraphics[scale=0.5]{Images/activity_lifecycle.png}
+	\includegraphics[scale=0.45]{Images/activity_lifecycle.png}
 	\caption{Le cycle de vie d'une activité}
 \end{figure}
 
-Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer notre propre parseur.
-%TODO Guillaume explication sauvegarde grâce au parseur
+Afin d'enregistrer cette liste dans le fichier \emph{save.xml}, nous avons créer notre propre parseur.
+Ce parseur \emph{xml} a été développé à partir de la librairie \href{http://www.jdom.org/}{\textbf{JDOM}} et permet de charger et sauvegarder des fichiers xml
+de la forme :
+\begin{lstlisting}[language=XML]
+<backup>
+	<list name="listName" open="true|false">
+		</task name="taskName" checked="true|false"/>
+	</list>
+</backup>
+\end{lstlisting}
+Le parseur va parcourir le fichier et lorsqu'il rencontre une balise \emph{list}, il crée un objet de type \emph{ListT} et lorsqu'il rencontre une balise
+\emph{task}, il crée un objet de type \emph{Task} qu'il ajoute à la dernière liste créée.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 6
@@ -305,11 +323,24 @@ Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer not
 \newpage
 \section{Expérimentation}
 \label{experimentation}
-%TODO Guillaume
+Pour rendre notre application nous avons essayé de mettre en place un système de \emph{Swipe} pour la suppression des listes et des tâches, et un système de
+\emph{Drag and Drop} pour les déplacer. Pour cela nous avons essayé d'utiliser un \href{https://github.com/bauerca/drag-sort-listview}{Framework} qui permet
+d'appliquer des effets graphiques sur des \emph{ListView}. Seulement notre application est basée sur des \emph{ExpandableListView}. Ce qui ne permet son
+utilisation sans réécrire une bonne partie du Framework.
 
 \subsection{Suppression par Swipe}
+Le but de cette gesture aurait été de pouvoir supprimer une tâche ou une liste de tâches sans avoir de boîte de dialogue pour confirmer la suppression, ce qui
+ajouterait du dynamisme à notre application
 
 \subsection{Déplacement de listes/tâches par Drag and Drop}
+Dans la configuration actuel de notre application, il n'est pas possible de déplacer ni les listes, ni les tâches. Cette gesture aurait permis de remédier à
+cela. Le \emph{Drag and Drop} aurait été implémenté de la manière suivante :
+\begin{itemize}
+	\item Sur la liste et la tâche, aurait été affiché un bouton qui lorsque l'on appui dessus active le \emph{Drag and Drop} et permet le déplacement de la
+liste ou de la tâche. L'utilisation du bouton est importante puisqu'elle empêche à l'application de confondre le \emph{Drag and Drop} et le \emph{Swipe}.
+	\item Les tâches pourraient ainsi être déplacées soit à l'intérieur de la liste, soit déplacées d'une liste à un autre.
+\end{itemize}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -318,14 +349,14 @@ Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer not
 \newpage
 \section{Limite de l'application}
 Notre application à ses propres limites.
-On pourrait imaginer d'ajouter certaines fonctionnalitées comme par exemple:
+On pourrait imaginer d'ajouter certaines fonctionnalités comme par exemple:
 \begin{itemize}
 \item Recherche (\includegraphics[scale=0.2]{Images/search.png}): qui permetterai à l'utilisateur d'afficher seulement les listes qui ont un nom ou qui ont des tâches dont le nom contient la chaîne du filtre.
 \item Partage (\includegraphics[scale=0.2]{Images/share.png}): qui permettrai à l'utilisateur de partager sa ou ses listes sur des réseaux sociaux ou par mail.
 \item Favoris (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de mettre certaines listes ou tâches en favoris et d'y avoir accès via un onglet favoris. Cela permetterai d'avoir un accès plus rapide.
-\item Rappel (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de définir un rappel sur une tâche afin que celle-ci soit exécutée dans les temps.
+\item Rappel (\includegraphics[scale=0.2]{Images/event.png}): qui permetterai à l'utilisateur de définir un rappel sur une tâche afin que celle-ci soit exécutée dans les temps.
 \end{itemize}
-%TODO A compléter si des idées A voir si on met tout --> Programmer un rappel d'evenement sur une tâche ajouter un champ information/note
+%TODO A compléter si des idées
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  CONCLUSION GENERALE

@@ -1,18 +1,18 @@
-\BOOKMARK [1][-]{section.1}{Introduction}{}
-\BOOKMARK [1][-]{section.2}{Les fonctionnalit\351s}{}
-\BOOKMARK [2][-]{subsection.2.1}{Fonctionnalit\351s principales}{section.2}
-\BOOKMARK [2][-]{subsection.2.2}{Fonctionnalit\351s secondaires}{section.2}
-\BOOKMARK [1][-]{section.3}{Sc\351narios}{}
-\BOOKMARK [2][-]{subsection.3.1}{Sc\351nario 1 - Cr\351ation/Utilisation/Suppression d'une liste}{section.3}
-\BOOKMARK [2][-]{subsection.3.2}{Sc\351nario 2 - Gestion des listes et sauvegarde}{section.3}
-\BOOKMARK [1][-]{section.4}{L'IHM}{}
-\BOOKMARK [2][-]{subsection.4.1}{L'activit\351 principale}{section.4}
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Choix r\351alis\351s \(Position des boutons, Gestures, ...\)}{subsection.4.1}
-\BOOKMARK [2][-]{subsection.4.2}{Affichage des listes et t\342ches}{section.4}
-\BOOKMARK [1][-]{section.5}{Le mod\350le}{}
-\BOOKMARK [1][-]{section.6}{Sauvegarde des donn\351es}{}
-\BOOKMARK [1][-]{section.7}{Exp\351rimentation}{}
-\BOOKMARK [2][-]{subsection.7.1}{Suppression par Swipe}{section.7}
-\BOOKMARK [2][-]{subsection.7.2}{D\351placement de listes/t\342ches par Drag and Drop}{section.7}
-\BOOKMARK [1][-]{section.8}{Limite de l'application}{}
-\BOOKMARK [1][-]{section.9}{Conclusion g\351n\351rale}{}
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Les fonctionnalit\351s}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Fonctionnalit\351s principales}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Fonctionnalit\351s secondaires}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Sc\351narios}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Sc\351nario 1 - Cr\351ation/Utilisation/Suppression d'une liste}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Sc\351nario 2 - Gestion des listes et sauvegarde}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{L'IHM}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{L'activit\351 principale}{section.4}% 9
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Choix r\351alis\351s \(Position des boutons, Gestures, ...\)}{subsection.4.1}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Affichage des listes et t\342ches}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Le mod\350le}{}% 12
+\BOOKMARK [1][-]{section.6}{Sauvegarde des donn\351es}{}% 13
+\BOOKMARK [1][-]{section.7}{Exp\351rimentation}{}% 14
+\BOOKMARK [2][-]{subsection.7.1}{Suppression par Swipe}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.2}{D\351placement de listes/t\342ches par Drag and Drop}{section.7}% 16
+\BOOKMARK [1][-]{section.8}{Limite de l'application}{}% 17
+\BOOKMARK [1][-]{section.9}{Conclusion g\351n\351rale}{}% 18
