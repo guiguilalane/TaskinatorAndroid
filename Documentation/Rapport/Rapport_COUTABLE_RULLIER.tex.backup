@@ -59,7 +59,9 @@ colorlinks = true, % Colorise les liens
 urlcolor = blue, % Couleur des hyperliens
 linkcolor = black, % Couleur des liens internes
 }
-
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
 \definecolor{grey}{rgb}{0.95,0.95,0.95}
 
 % Language Definitions for Turtle
@@ -80,11 +82,25 @@ frame=single,
 breaklines=true,
 basicstyle=\ttfamily,
 backgroundcolor=\color{grey},
-basicstyle=\scriptsize,
+basicstyle=\ttfamily,
+columns=fullflexible,
+showstringspaces=false,
 keywordstyle=\color{blue},
 commentstyle=\color{green},
 stringstyle=\color{red},
-identifierstyle=\color{blue}
+identifierstyle=\color{blue},
+tabsize=4
+}
+
+\lstdefinelanguage{XML}
+{%
+morestring=[b]",
+morestring=[s]{>}{<},
+morecomment=[s]{<?}{?>},
+stringstyle=\color{black},
+identifierstyle=\color{darkblue},
+keywordstyle=\color{cyan},
+morekeywords={name, open, checked}% list your attributes here
 }
 
 %Definition de la commande pour retirer l'espace devant les ':'
@@ -105,7 +121,7 @@ identifierstyle=\color{blue}
 % Définition des entêtes et pieds de page
 \fancyhead[LE,CE,RE,LO,CO,RO]{}
 \fancyfoot[LE,CE,RE,LO,CO,RO]{}
-\fancyhead[LO, LE]{Interface Homme-Machine 1}
+\fancyhead[LO, LE]{Interface Homme-Machine 2}
 \fancyhead[RO,RE]{2012/2013}
 \fancyfoot[LO,LE]{Université de \scshape{Nantes}}
 \fancyfoot[RO,RE]{Page \thepage \ sur \pageref{LastPage}}
@@ -119,10 +135,11 @@ identifierstyle=\color{blue}
 \begin{center}
 {\large \textsc{Rapport de Projet}} \\
 \vspace{1cm}
-{\LARGE Projet : Gestionnaire de listes de tâches} \\
+{\LARGE Projet : Gestionnaire simple de tâches} \\
 \vspace{1cm}
-\textbf{Taskinator} \\
-\includegraphics[height=1cm]{Images/Taskinator.png} \\
+\textbf{Taskinator Android} \\
+\vspace{0.3cm}
+\includegraphics[height=1cm]{Images/Taskinator.png} \includegraphics[height=1cm]{Images/android.png} \\
 \vspace{1cm}
 COUTABLE Guillaume, RULLIER Noémie \\
 \today
@@ -148,11 +165,9 @@ COUTABLE Guillaume, RULLIER Noémie \\
 %%%%%%%%%%  Introduction générale
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-L'objectif de ce projet fut de développer un gestionnaire avancé de tâches. Celui-ci devait permettre de créer des listes de tâches et de suivre l'avancement
-de celles-ci.
+L'objectif de ce projet fut de développer un gestionnaire simple de tâches. Celui-ci devait permettre de créer des listes de tâches et de suivre l'avancement de celles-ci.
 
-Afin de créer cette application que nous avons appelé \textit{Taskinator}, nous avons établit plusieurs étapes dans l'avancement du projet. Ce rapport
-présentera  ces étapes  les unes après  les autres.
+Afin de créer cette application que nous avons appelé \textit{Taskinator}, nous avons établit plusieurs étapes dans l'avancement du projet. Ce rapport présentera ces étapes les unes après les autres.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 1
@@ -163,113 +178,42 @@ La première étape fut d'analyser l'ensemble des fonctionnalités que notre app
 
 \subsection{Fonctionnalités principales}
 Voici dans un premier temps les fonctionnalités principales:
-\paragraph{Créer une liste:} cette fonctionnalité permet à l'utilisateur de créer une liste non ordonnée vide.
-\paragraph{Créer une liste ordonnée:} cette fonctionnalité permet à l'utilisateur de créer une liste ordonnée vide. L'ensemble des éléments de cette liste
-doivent être effectués dans un ordre précis.
+\paragraph{Créer une liste:} cette fonctionnalité permet à l'utilisateur de créer une liste vide.
 \paragraph{Créer une tâche:} cette fonctionnalité permet à l'utilisateur de créer une tâche.
-\paragraph{Supprimer un élément:} cette fonctionnalité permet de supprimer une tâche ou une liste (ordonnée ou non). Cette fonctionnalité est à manipuler avec
-précaution, en effet dans le cas d'une liste, la suppression de celle-ci implique aussi la suppression de tous ses éléments (listes ou tâches).
-\paragraph{Enregistrer:} cette fonctionnalité permet à l'utilisateur d'enregistrer sa liste dans un fichier sur son disque dur.
-\paragraph{Enregistrer un template:} cette fonctionnalité permet à l'utilisateur d'enregistrer la liste qu'il vient de créer comme un template afin que la
-structure de celle-ci soit réutilisable.
-\paragraph{Ouvrir un template:} cette fonctionnalité permet à l'utilisateur de créer une liste à partir d'un template enregistré. Il devra cependant renseigner
-le nom de cette liste ainsi que toutes les dates de tous les éléments. Il peut ensuite continuer à modifier cette liste.
+\paragraph{Supprimer un élément:} cette fonctionnalité permet de supprimer une tâche ou une liste. Cette fonctionnalité est à manipuler avec précaution, en effet dans le cas d'une liste, la suppression de celle-ci implique aussi la suppression de toutes ses tâches.
 
 \subsection{Fonctionnalités secondaires}
 Voici les fonctionnalités secondaires:
-\paragraph{Paramètre:} cette fonctionnalité permet à l'utilisateur de modifier le type de l'élément sélectionné. Il pourra par exemple choisir de modifier une
-liste en liste ordonnée ou en une tâche. Cette fonctionnalité est à manipuler avec précaution, en effet si l'utilisateur décide de transformer une liste en
-tâche l'ensemble des éléments de la liste seront supprimés.
-\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre un élément dans l'arborescence de la liste. Dans le cas d'une liste, tous
-ces éléments sont aussi montés/descendus d'un rang. Si le changement se fait au sein d'une liste ordonnée l'ordre des éléments est aussi changé.
-\paragraph{Aperçu:} cette fonctionnalité permet à l'utilisateur d'avoir un aperçu de sa liste, se qui permettra l'affichage d'un nombre plus important de
-tâches.
-\paragraph{Gérer ses templates:} cette fonctionnalité permet à l'utilisateur d'ajouter et de supprimer des templates.
+\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre une liste ou une tâche. Dans le cas d'une liste, toutes ces tâches sont aussi montées/descendues d'un rang. Dans le cas d'une tâche, on autorise un déplacement dans une autre liste. (Cette fonctionalité n'a pas été implémentée)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Storyboard, \paperPrototyping et Scénarios}
+\section{Scénarios}
+Nous avons imaginé différents scénarios d'utilisation de notre application.
 
-\subsection{Storyboard}
-Le storyboard permet de montrer à quoi sert l'application. Il utilise les star people de Bill VerPlank. A la fin su storyboard, le personnage atteint son but et
-est satisfait. Nous avons donc ici créé notre storyboard pour notre application:
-\begin{figure}[H]
-    \center
-    \includegraphics[width=13.9cm]{Images/storyboard.png}
-    \caption{Le storyboard}
-\end{figure}
-
-
-\subsection{Paper prototyping}
-
-\subsubsection{Les maquettes}
-Voici quelques unes des maquettes réalisées pour le paper prototyping. Les maquettes
-ici présentent sont celles qui ont été utilisées pour la réalisation de la vidéo du scénario 1 présenté ci-dessous.
-\begin{figure}[H]
-    \center
-    \includegraphics[width=6.8cm]{Images/maquette1.jpeg}
-    \includegraphics[width=7.1cm]{Images/maquette2.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette3.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette4.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette5.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette6.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette7.jpeg}
-    \includegraphics[width=6.8cm]{Images/maquette8.jpeg}
-    \caption{\paperPrototyping}
-\end{figure}
-
-\subsubsection{Choix réalisés}
-Dans cette section, nous expliquons les choix effectués, mis en avant dans le \paperPrototyping{} et pourquoi nous avons choisi de mettre en place ces solutions
-:
-% Nous avons dû faire quelques choix pour la conception de l'interface. Nous vous les présentons ici et surtout nous expliquons pourquoi nous avons choisi telle
-% solution:
-
-\begin{itemize}
-\item \textbf{Fonctionnalité de création (liste ordonnée ou non et tâche):} nous avons décidé d'adopter un système de sélection de l'élément "fils". Expliquons
-ce système. Lorsque l'utilisateur créé une liste, un élément vide de cette liste apparaît. L'utilisateur doit alors sélectionner cet élément et définir de quel
-type l'élément sera. Lorsque cet élément à un type, un nouvel élément vide apparaît; l'utilisateur peut alors définir un autre élément et ainsi de suite. Si
-l'utilisateur ne souhaite pas continuer à remplir cette liste, il ne tient plus compte des éléments vides.
-\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé de placer ces fonctionnalités dans la boîte à outils plutôt que sur
-l'élément à déplacer pour un gain de temps au niveau de l'utilisation. En effet, si nous avions fait le choix de mettre les boutons \textit{monter} et
-\textit{descendre} sur l'élément, lorsque l'utilisateur aurait déplacé l'élément, il aurait perdu le focus de la souris sur ces boutons.
-Attention, lors de l'utilisation de cette fonctionnalité dans une liste ordonnée; si on monte ou descend un élément de tel façon qu'un élément coché se trouve
-être en dessous d'un élément non coché dans la liste, alors le déplacement ne sera pas activé. (Cette dernière précaution n'a pas été implémentée)
-\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément pour que l'utilisateur puisse
-supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste sélectionnée peut entraîner
-la suppression d'éléments. Pour plus de sécurité, le focus de la validation de la suppression est par défaut sur \textit{Non}.
-\item \textbf{Fonctionnalité \textit{Paramètre}:} nous avons décidé pour cette fonctionnalité (qui peut entraîner la suppression de différents éléments) de
-faire, également, apparaître une fenêtre d'avertissement. Dans cette fenêtre le focus de la validation du changement est mise à \textit{Non}. On perd
-cependant un peu de vitesse d'exécution (si l'utilisateur souhaite effectivement bien effectuer ce changement) au profit de plus de sécurité.
-% \item \textbf{Widget désactivé :} nous avons décidé de griser tout menu, bouton inutilisable à un état de l'application afin que l'utilisateur n'exécute pas
-% d'actions impossibles. Cela évitera qu'il se pose des questions s'il voit aucun changement effectué.
-\end{itemize}
-
-\subsection{Scénarios}
-Afin de tester notre paper Prototype, nous avons créé plusieurs scénarios.
-\subsubsection{Scénario 1 - Création/Utilisation/Suppression de liste}
-Ce premier scénario a été utilisé pour tester le \paperPrototyping. Il permet de créer une liste non ordonnée et d'y ajouter une liste ordonnée avec ses propres
-tâches et des tâches.
+\subsection{Scénario 1 - Création/Utilisation/Suppression d'une liste}
+Ce premier scénario permet de créer une liste et d'y ajouté des tâches.
 \begin{enumerate}
-\item{L'utilisateur choisit quel type de liste il souhaite créer, il choisit ici une liste non ordonnée. Il lui donne un nom et une date de fin. (Pour notre scénario cette liste sera appelée la liste mère)}
-\item{Il crée ensuite une liste ordonnée (qui est le premier élément de la liste mère). Il lui donne un nom et une date. (Pour notre scénario cette liste sera appelée la liste 1)}
-\item{Il crée ensuite une tâche qui sera le premier élément de la liste 1. Il lui donne un nom et une date. (Pour notre scénario cette tâche sera appelée la tâche 1.1)}
-\item{Il créer ensuite une tâche qui sera le deuxième élément de la liste 1. Il lui donne un nom et une date. (Pour notre scénario cette tâche sera appelée la tâche 1.2)}
-\item{Il souhaite maintenant échanger les tâches 1.1 et 1.2, il sélectionne donc la tâche 1.1 et la place au dessous de la tâche 1.2}
-\item{Une popup peut apparaître et informe l'utilisateur que l'action qu'il vient d'effectuer provoque un conflit de date. Le champs date concerné par le conflit prend une couleur orange d'avertissement.}
-\item{L'utilisateur change le type de la liste 1 en une liste non ordonnée.}
-\item{L'utilisateur supprime la tâche 1.2}
-\item{L'utilisateur supprime la tâche 1. Une popup apparaît pour l'avertir que cette suppression supprimera aussi tous les éléments de la liste.}
+\item{L'utilisateur crée une liste et lui donne un nom \textit{Ski}.}
+\item{Il crée ensuite une tâche dans cette liste et lui donne un nom \textit{Bonnet}.}
+\item{Il crée ensuite une autre tâche dans cette liste et lui donne un nom \textit{Echarpe}.}
+\item{L'utilisateur supprime la tâche \textit{Bonnet}.}
+\item{L'utilisateur supprime la liste \textit{Ski}. Une popup apparaît pour l'avertir que cette suppression supprimera aussi toutes les tâche de la liste.}
 \end{enumerate}
 
-\subsubsection{Scénario 2 - Utilisation des templates}
-Ce scénario permet de créer une liste à partir d'un template. De modifier cette liste et de la réenregistrer comme un nouveau template.
+\subsection{Scénario 2 - Gestion des listes et sauvegarde}
+Ce scénario permet de créer des listes et de les modifiers. Il permet aussi de constater que l'état de l'application est sauvegardé.
 \begin{enumerate}
-\item{L'utilisateur choisit de créer une liste à partir d'un template. Il choisit ici le template qui correspond à la préparation d'un cours, puis donne un nom et une date à sa liste.}
-\item{Il va ensuite pour tous les éléments de ce template donner une date.}
-\item{L'utilisateur va ensuite modifier cette liste en y ajoutant une tâche à la liste mère (il lui donne un nom et une date).}
-\item{Il va ensuite vouloir enregistrer cette nouvelle liste comme un nouveau template.}
+\item{L'utilisateur choisit de créer une liste et lui donne un nom \textit{Course}.}
+\item{Il décide ensuite de créer une nouvelle liste et lui donne un nom \textit{Sac de voyage}.}
+\item{Il décide ensuite d'inverser ces deux listes, pour cela il reste longtemps appuyé sur la liste \textit{Sac de voyage} et la glisse un rang plus haut.}
+\item{L'utilisateur va ensuite supprimer la liste \textit{Course}.}
+\item{L'utilisateur va ensuite ouvrir une autre application et revenir sur \textit{Taskinator}. Il peut constater que l'application est ouverte avec l'état dans lequel on l'a quittée. C'est à dire que si une liste était ouverte ou fermée quand on a quitté l'application, celle-ci sera dans le même état quand on y reviendra.}
+\item{L'utilisateur décide de créer une nouvelle tâche dans \textit{Sac de voyage}. Pendant qu'il entre le nouveau nom de cette tâche, il va recevoir un appel. Lorsque l'appel est terminé, il sera automatiquement redirigé vers Taskinator exactement dans le même état qu'avant l'appel. S'il avait commencé à taper \textit{Chauss}, il retrouvera le même début de mot.}
+\item{L'utilisateur va recevoir un appel pendant qu'il est en train de rentrer un nom pour sa liste}
+\item{Cette fois-ci, l'utilisateur quitte l'application. De même s'il l'a lance à nouveau, celle-ci est ouverte avec le dernier état dans lequel on l'a quittée.}
 \end{enumerate}
 
 
@@ -279,102 +223,55 @@ Ce scénario permet de créer une liste à partir d'un template. De modifier cet
 \newpage
 \section{L'IHM}
 
-% \item \textbf{Widget désactivé :} nous avons décidé de griser tout menu, bouton inutilisable à un état de l'application afin que l'utilisateur n'exécute pas
-% d'actions impossibles. Cela évitera qu'il se pose des questions s'il voit aucun changement effectué.
-
-Afin de créer une interface la plus simple et explicite possible pour l'utilisateur nous avons effectué différents choix que nous allons expliquer ci-dessous.
-
-La fenêtre principale est tout d'abord composée d'un menu, d'une boite à outils et d'une zone réservée à l'affichage de la liste en cours de création.
+\subsection{L'activité principale}
+L'application est tout simplement composée d'une zone réservée à l'affichage de la liste en cours de création et d'une barre d'action.
 \begin{figure}[H]
     \center
-    \includegraphics[width=14cm]{Images/mainWindow.png}
-    \caption{La fenêtre principale}
+    \includegraphics[width=3.7cm]{Images/mainActivity.png}\quad
+    \includegraphics[width=3.7cm]{Images/mainActivityPart.png}
+    \caption{L'application}
 \end{figure}
 
-\subsection{Le menu}
-Le menu permet de regrouper différentes fonctionnalités sous un thème/rubrique.
-On retrouvera les fonctionnalités suivantes:
+\subsubsection{Choix réalisés (Position des boutons, Gestures, ...)}
+Dans cette section, nous expliquons les choix effectués et pourquoi nous avons choisi de mettre en place ces solutions:
+
 \begin{itemize}
-%%%%%%%%%%%%%%%%%%%%%%% Fichier %%%%%%%%%%%%%%%%%%%%%%%
-\item Fichier
-\begin{itemize}
-\item \textbf{Nouveau:} qui permet de créer une nouvelle liste vide ou à partir d'un template.
-\item \textbf{Ouvrir:} qui permet d'ouvrir une liste au format \textit{.tor} enregistrer sur le disque dur de l'utilisateur.
-\item \textbf{Ouvrir récent:} qui permet à l'utilisateur d'ouvrir l'une des cinq dernières listes ouvertes dans cette application.
-\item \textbf{Enregistrer:} qui permet à l'utilisateur d'enregistrer sa liste en cours à chemin déjà spécifié.
-\item \textbf{Enregistrer sous :} qui permet à l'utilisateur de choisir le chemin auquel il souhaite enregistrer sa liste et de l'enregistrer.
-\item \textbf{Exporter:} qui permet à l'utilisateur d'exporter sa liste au format PDF. (Cette fonctionnalitée n'a pas été implémentée)
-\item \textbf{Quitter:} qui permet à l'utilisateur de quitter l'application.
-\end{itemize}
+\item \textbf{Fonctionnalité de création de liste:} nous avons choisi de créer de nouvelles listes en cliquant sur le bouton "Add list" en bas de l'écran.
 \begin{figure}[H]
     \center
-    \includegraphics[width=2cm]{Images/menuFichier.png}
-    \caption{Le menu Fichier}
+    \subfloat[Boîte de dialogue pour le nom de la liste]{\includegraphics[width=3.7cm]{Images/addList.png}}\quad
+    \subfloat[Liste vide fermée]{\includegraphics[width=3.7cm]{Images/enteteList.png}}\quad
+    \subfloat[Liste vide ouverte]{\includegraphics[width=3.7cm]{Images/listVide.png}}
+    \caption{Ajout d'une liste}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%% Edition %%%%%%%%%%%%%%%%%%%%%%%
-\item Édition
-\begin{itemize}
-\item \textbf{Annuler:} qui permet à l'utilisateur d'annuler une action qu'il vient d'effectuer. (Cette fonctionnalitée n'a pas été implémentée)
-\item \textbf{Rétablir:} qui permet à l'utilisateur de rétablir une action qu'il vient d'annuler. (Cette fonctionnalitée n'a pas été implémentée)
-\end{itemize}	
+Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle liste. L'utilisateur doit ensuite valider en cliquant sur "OK", s'il appui sur "Cancel", la nouvelle liste ne sera pas créée. Si l'utilisateur déroule sa liste, un nouvel item apparaît sur la page muni d'un bouton "+". Celui-ci permettra de créer de nouvelles tâches pour la liste.
+\item \textbf{Fonctionnalité de création de tâche:} nous avons choisi de créer de nouvelles tâches en cliquant sur le bouton "+" présent sous chaque liste pour ajouter une tâche à la liste correspondante. Lorsque l'utilisateur clique sur ce bouton, une nouvelle boite de dialogue apparaît et permet de rentrer le nouveau nom de la tâche.
 \begin{figure}[H]
     \center
-    \includegraphics[width=2cm]{Images/menuEdition.png}
-    \caption{Le menu Fichier}
+    \subfloat[Boîte de dialogue pour le nom de la tâche]{\includegraphics[width=3.7cm]{Images/addTask.png}}\quad
+    \subfloat[Tâche]{\includegraphics[width=3.7cm]{Images/listTask.png}}
+    \caption{Ajout d'une tâche}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%% Outils %%%%%%%%%%%%%%%%%%%%%%%
-\item Outils
-\begin{itemize}
-\item \textbf{Enregistrer template:} qui permet à l'utilisateur d'enregistrer sa liste en tant que template au format \textit{.ulk}.
-\item \textbf{Option:} qui permet à l'utilisateur de gérer ses templates. Il peut choisir le chemin vers lequel il souhaite enregistrer ses templates. La liste des templates présents est affichée. On peut sélectionner un template et afficher sa structure. On peut de plus importer ou supprimer un template .
-\end{itemize}
+L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+"). Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
+\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu. (Fonctionnalitée non implémentée mais expérimentée voir \ref{experimentation}).
+\item \textbf{Fonctionnalité \textit{Modifier}:} nous avons choisi d'ajouter cette possibilité de modification du nom sur chaque élément par la présence du bouton \includegraphics[width=0.5cm]{Images/modify.png}.
+\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément (liste ou tâche) pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. Le bouton représentant cette fonctionnalité est le suivant \includegraphics[width=0.5cm]{Images/trash_empty.png}
+\item \textbf{Fonctionnalité \textit{Supprimer tout}:} nous avons choisi d'ajouter cette possibilité de supprimer l'ensemble des listes crées par l'utilisateur afin que celui-ci n'est pas à supprimer toutes les tâches une par une s'il souhaite vraiment tout supprimer. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression de l'ensemble des listes est une opération importante.
+\item \textbf{Indicateur:} nous avons choisi d'ajouter sur la liste un indicateur permettant de connaître le nombre de tâches validées sur le nombre de tâche de la liste, afin que l'utilisateur puisse voir l'état de sa liste plus rapidement.
 \begin{figure}[H]
     \center
-    \includegraphics[width=2cm]{Images/menuOutils.png}
-    \caption{Le menu Fichier}
+    \subfloat[Tâche validée]{\includegraphics[width=3.7cm]{Images/listTaskChecked.png}} \quad
+    \subfloat[Une tâche validée sur deux]{\includegraphics[width=3.7cm]{Images/listTwoTask.png}}
+    \caption{Validation de tâche et indicateur}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%% Aide %%%%%%%%%%%%%%%%%%%%%%%
-\item Aide
-\begin{itemize}
-\item \textbf{A propos:} permet à l'utilisateur d'avoir plus d'information sur l'application \textit{Taskinator}.
-\end{itemize}
 \end{itemize}
 
-\subsection{Boite à outils}
-Cette boite à outils permet de rassembler toutes les fonctionnalités que l'utilisateur sera amené à utiliser fréquemment. Nous avons décidé de mettre cette boite à outils à gauche, puisque dans notre culture le sens de lecture est de gauche à droite. Toutes les fonctionnalités présentent dans cette boîte à outils seront appliquées sur l'élément sélectionné dans la zone d'affichage de la liste. Cette boite à outils contient les fonctionnalités suivantes:
-\begin{itemize}
-\item \textbf{Créer une liste non ordonnée (\includegraphics[width=0.25cm]{Images/list.png}) :} elle permet à l'utilisateur de créer une nouvelle liste non ordonnée.
-\item \textbf{Créer une liste ordonnée (\includegraphics[width=0.25cm]{Images/list_ordered.png}) :} elle permet à l'utilisateur de créer une nouvelle liste ordonnée.
-\item \textbf{Créer une tâche (\includegraphics[width=0.25cm]{Images/task.png}) :} elle permet à l'utilisateur de créer une nouvelle tâche.
-\item \textbf{Paramètre (\includegraphics[width=0.25cm]{Images/gnome-system.png}) :} elle permet à l'utilisateur de changer le type d'un élément.
-\item \textbf{Monter (\includegraphics[width=0.25cm]{Images/arrow_up.png}) :} elle permet à l'utilisateur de monter un élément.
-\item \textbf{Descendre  (\includegraphics[width=0.25cm]{Images/arrow_down.png}) :} elle permet à l'utilisateur de descendre un élément.
-\item \textbf{Supprimer  (\includegraphics[width=0.25cm]{Images/trash_empty.png}) :}  elle permet à l'utilisateur de supprimer un élément.
-\end{itemize}
-Tous les boutons permettant de réaliser ces fonctionnalités ont été implémentés grâce à des \textit{QToolButton}. Nous avons ensuite utilisé des signaux et des slots afin de connecter l'action à réaliser aux boutons.
+\subsection{Affichage des listes et tâches}
+Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et pour chacune d'entre elle sa ou ses tâche(s).
 
-\subsection{Zone d'affichage de la liste}
-Cette zone est comme indiqué réservée à l'affichage de la liste en cours de création. On pourra donc voir l'arborescence de la liste, avec toutes ses informations.
-Cette zone sera organisée en une arborescence d'éléments. Pour cela, nous avons utilisé un \textit{QTreeWidget}. Celui-ci sera composé d'éléments.
+La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un autre TextView permettant d'afficher le nombre de tâches validées sur le nombre de tâche de la liste, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
 
-Nous avons créé notre propre élément (héritant de \textit{QWidget}) composé d'un \textit{QLineEdit} permettant de taper le nom de l'élément, d'un \textit{QDateEdit} permettant de rentrer la date, d'un \textit{QToolButton} permettant d'ajouter la fonctionnalité de suppression sur l'élément et d'une \textit{QCheckBox} permettant de valider la réalisation de la tâche.
-Plusieurs cas sont possible pour l'état de la checkbox:
-\begin{itemize}
-\item Dans le cas d'un élément d'une liste ordonnée, cette checkbox sera grisée si la tâche antérieure n'est pas cochée.
-\item Dans le cas ou l'élément est une liste, tant que la checkbox de la liste est grisée, tous les éléments fils ont des checkbox grisées.
-\item Dans le cas d'une liste, sa checkbox sera automatiquement cochée lorsque tous les éléments de la liste seront eux aussi cochés.
-\end{itemize}
-\begin{figure}[H]
-    \center
-    \includegraphics[width=7.4cm]{Images/caseDesactive.png}
-    \includegraphics[width=7.4cm]{Images/checkboxListe.png}
-    \caption{Fonctionnement de l'activation/désactivation des cases à cocher}
-\end{figure}
-Nous aurons une information supplémentaire au début de chaque élément. Dans le cas d'une liste non ordonnées, ses éléments sont représentés avec un tiret devant les informations de la liste, tandis que les éléments des listes ordonnées sont représentés à l'aide de numéro.
-
-Nous avons décidé pour plus de sécurité de griser tout menu, bouton inutilisable à un état de l'application afin que l'utilisateur n'exécute pas
-d'actions impossibles. Cela évitera qu'il se pose des questions s'il voit aucun changement effectué. De cette façon l'utilisateur sait à
-chaque instant que cette fonctionnalité est présente et n'a pas à chercher si une action particulière peut être effectuée ou pas.
+La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un TextView permettant de taper d'afficher le nom de la tâche, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom sur la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 4
@@ -388,26 +285,78 @@ Afin de réaliser cette application nous nous sommes basés sur le modèle suiva
 	\caption{Diagramme de classe du modèle}
 \end{figure}
 
-Le modèle de cette application est composé d'un pattern composite permettant d'implémenter une structure d'arbre et de composer les différents objets ensemble.
-Nous avons donc ici un \textit{Component} qui peut être, soit une \textit{Task} (une tâche), soit une \textit{List} (une liste) qui elle-même peut ensuite être
-une \textit{SortedList} (une liste ordonnée), celle-ci hérite de la classe \textit{List}. Ce modèle permet donc comme expliqué ci-dessus de composer ces
-éléments et d'obtenir par exemple des listes de listes de tâches \dots 
-Nous pouvons donc gérer tous ces composants au sein de ce modèle et ainsi, ajouter un composant dans une liste, le supprimer, le déplacer d'un rang
-(dans les deux sens). Nous disposons aussi de toutes les fonctions permettant de déterminer si un composant est cochable ou non.
+Le modèle de cette application est très simple. Il est composé de deux classes, \textit{ListT} et \textit{Task}.
+Nous avons donc ici une \textit{ListT} qui va pouvoir contenir un ensemble de tâches et d'autres propriétés comme le nom et si elle est ouverte ou non. Nous avons de plus une \textit{Task} qui va elle représenter une tâche et contenir certaines informations comme son nom et si elle est cochée ou non.
+Nous pouvons donc gérer tous ces listes au sein de ce modèle et ainsi, ajouter une tâche dans celle-ci. On peut pour les listes comme les tâches les supprimer, les déplacer d'un rang (dans les deux sens).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+\section{Sauvegarde des données}
+Afin que l'utilisateur retrouve l'ensemble de ses données quand il quitte l'application, ou qu'il tourne son téléphone et que l'orientation change, ou qu'il reçoive un appel pendant qu'il utilise l'application; il a été nécessaire de sauvegarder ses données. Pour cela, nous avons décider d'utiliser l'Internal Storage. Celui-ci permet de stocker en interne des fichiers sur l'appareil et que ces fichiers soit privés pour notre application. Ces fichiers seront supprimés lors de la désinstallation de l'application par l'utilisateur.
+
+Nous avons donc décidé de sauvegarder notre liste dans un fichier \emph{xml} et de la restaurer via ce ficher. Cette sauvegarde s'effectue dans la fonction \emph{onPause()}. Comme on peut le voir sur le schéma ci-dessous, dès que l'activité n'est plus au premier plan, elle passe par la fonction \emph{onPause()}. On est donc sûr d'avoir la dernière version de la liste enregistrée.
+Nous devons donc maintenant restaurer cette liste à partir du fichier (que nous avons décidé d'appeler \textit{save.xml}). Nous avons décidé d'effectuer cette restauration dans la fonction \emph{onCreate()}. En effet à chaque nouveau lancement de l'application, on recharge la liste à partir du fichier \textit{save.xml}.
+\begin{figure}[htpb]
+	\center
+	\includegraphics[scale=0.5]{Images/activity_lifecycle.png}
+	\caption{Le cycle de vie d'une activité}
+\end{figure}
+
+Afin d'enregistrer cette liste dans le fichier \emph{save.xml}, nous avons créer notre propre parseur.
+Ce parseur \emph{xml} à été développé à partir de la librairie \href{http://www.jdom.org/}{\textbf{JDOM}} et permet de charger et sauvegarder des fichiers xml
+de la forme :
+\begin{lstlisting}[language=XML]
+<backup>
+	<list name="listName" open="true|false">
+		</task name="taskName" checked="true|false"/>
+	</list>
+</backup>
+\end{lstlisting}
+Le parseur va parcourir le fichier et lorsqu'il rencontre une balise \emph{list}, il créer un objet de type \empt{ListT} et lorsqu'il rencontre une balise
+\emph{task}, il créer un objet de type \empt{Task} qu'il ajoute à la dernière liste créée.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Etape 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Expérimentation}
+\label{experimentation}
+%TODO Guillaume
+Pour rendre notre application nous avons essayé de mettre en place un système de \emph{Swipe} pour la suppression des listes et des tâches, et un système de
+\emph{Drag and Drop} pour les déplacer. Pour cela nous avons essayé d'utiliser un \href{https://github.com/bauerca/drag-sort-listview}{Framework} qui permet
+d'appliquer des effet graphiques sur des \emph{ListView}. Seulement notre application est basée sur des \emph{ExpandableListView}. Ce qui ne permet son
+utilisation sans réécrire une bonne partie du Framework.
+
+\subsection{Suppression par Swipe}
+Le but de cette gesture aurait été de pouvoir supprimer une tâche ou une liste de tâches sans avoir de boîte de dialogue pour confirmer la suppression, se qui
+ajouterai du dynamisme à notre application
+
+\subsection{Déplacement de listes/tâches par Drag and Drop}
+Dans la configuration actuel de notre application, il n'est pas possible de déplacer ni les listes, ni les tâches. Cette gesture aurait permis de remédier à
+cela. Le \emph{Drag and Drop} aurait été implémenté de la manière suivante :
+\begin{itemize}
+	\item Sur la liste et la tâche, aurait été affiché un bouton qui lorsque l'on appui dessus active le \emph{Drag and Drop} et permet le déplacement de la
+liste ou de la tâche. L'utilisation du bouton est importante puisqu'elle empêche à l'application de confondre le \emph{Drag and Drop} et le \emph{Swipe}.
+	\item Les tâches pourraient ainsi être déplacées soit à l'intérieur de la liste, soit déplacées d'une liste à un autre.
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Etape 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Limite de l'application}
-%Parler de l'idée du prof, consernant la création de la liste d'une part et le faite de pouvoir cocher d'autre part.
-Notre application à ses propres limites. Elle ne permet pas d'éditer différentes listes en même temps (l'utilisateur peut créer/modifier une liste à la fois).
-
-Elle ne gère pas non plus la cohérence des dates des composants. Effectivement dans le cas d'une liste ordonnée, il faudrait vérifier que la date d'une tâche
-soit inférieure à la date de la tâche suivante. Cette vérification devra se faire lors de la création mais aussi à chaque action effectuée.
-
-Et ne peut pour le moment pas gérer un historique d'actions effectuées, se qui aurait put être très utile en cas d'erreur de manipulation(à la suite d'une
-suppression non souhaitée par exemple).
+Notre application à ses propres limites.
+On pourrait imaginer d'ajouter certaines fonctionnalités comme par exemple:
+\begin{itemize}
+\item Recherche (\includegraphics[scale=0.2]{Images/search.png}): qui permetterai à l'utilisateur d'afficher seulement les listes qui ont un nom ou qui ont des tâches dont le nom contient la chaîne du filtre.
+\item Partage (\includegraphics[scale=0.2]{Images/share.png}): qui permettrai à l'utilisateur de partager sa ou ses listes sur des réseaux sociaux ou par mail.
+\item Favoris (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de mettre certaines listes ou tâches en favoris et d'y avoir accès via un onglet favoris. Cela permetterai d'avoir un accès plus rapide.
+\item Rappel (\includegraphics[scale=0.2]{Images/event.png}): qui permetterai à l'utilisateur de définir un rappel sur une tâche afin que celle-ci soit exécutée dans les temps.
+\end{itemize}
 %TODO A compléter si des idées
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -416,8 +365,7 @@ suppression non souhaitée par exemple).
 \newpage
 \section{Conclusion générale}
 Ce projet nous a permis de réfléchir à la structure de l'IHM afin que celle-ci soit la plus intuitive possible pour l'utilisateur. Réfléchir à la position des
-boutons, le nom ou l'icône les représentant, comment l'ajout des composants se fera au sein de la liste, \ldots{}
+boutons, le nom ou l'icône les représentant, comment l'ajout des composants se fera au sein de la liste, la gesture à utiliser, l'utilisation d'un menu \ldots{}
 Et donc, d'orienter notre conception sur l'IHM, plus que sur le modèle, et ainsi expérimenter une autre approche de conception.
-%TODO A compléter
 
 \end{document}

@@ -3,22 +3,18 @@
 \catcode`;\active
 \catcode`!\active
 \catcode`?\active
-\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
-\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
-\global\let\oldcontentsline\contentsline
-\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
-\global\let\oldnewlabel\newlabel
-\gdef\newlabel#1#2{\newlabelxx{#1}#2}
-\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
-\AtEndDocument{\ifx\hyper@anchor\@undefined
-\let\contentsline\oldcontentsline
-\let\newlabel\oldnewlabel
-\fi}
-\fi}
-\global\let\hyper@last\relax 
-\gdef\HyperFirstAtBeginDocument#1{#1}
-\providecommand\HyField@AuxAddToFields[1]{}
-\@writefile{toc}{}
+\ifx\hyper@anchor\@undefined
+\global \let \oldcontentsline\contentsline
+\gdef \contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global \let \oldnewlabel\newlabel
+\gdef \newlabel#1#2{\newlabelxx{#1}#2}
+\gdef \newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\let \contentsline\oldcontentsline
+\let \newlabel\oldnewlabel}
+\else
+\global \let \hyper@last\relax 
+\fi
+
 \select@language{french}
 \@writefile{toc}{\select@language{french}}
 \@writefile{lof}{\select@language{french}}
@@ -60,5 +56,3 @@
 \@writefile{toc}{\contentsline {section}{\numberline {8}Limite de l'application}{11}{section.8}}
 \@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion g\IeC {\'e}n\IeC {\'e}rale}{12}{section.9}}
 \newlabel{LastPage}{{}{12}{}{page.12}{}}
-\xdef\lastpage@lastpage{12}
-\xdef\lastpage@lastpageHy{12}

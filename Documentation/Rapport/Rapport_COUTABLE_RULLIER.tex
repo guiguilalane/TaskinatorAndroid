@@ -59,7 +59,9 @@ colorlinks = true, % Colorise les liens
 urlcolor = blue, % Couleur des hyperliens
 linkcolor = black, % Couleur des liens internes
 }
-
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
 \definecolor{grey}{rgb}{0.95,0.95,0.95}
 
 % Language Definitions for Turtle
@@ -80,11 +82,25 @@ frame=single,
 breaklines=true,
 basicstyle=\ttfamily,
 backgroundcolor=\color{grey},
-basicstyle=\scriptsize,
+basicstyle=\ttfamily,
+columns=fullflexible,
+showstringspaces=false,
 keywordstyle=\color{blue},
 commentstyle=\color{green},
 stringstyle=\color{red},
-identifierstyle=\color{blue}
+identifierstyle=\color{blue},
+tabsize=4
+}
+
+\lstdefinelanguage{XML}
+{%
+morestring=[b]",
+morestring=[s]{>}{<},
+morecomment=[s]{<?}{?>},
+stringstyle=\color{black},
+identifierstyle=\color{darkblue},
+keywordstyle=\color{cyan},
+morekeywords={name, open, checked}% list your attributes here
 }
 
 %Definition de la commande pour retirer l'espace devant les ':'
@@ -284,12 +300,22 @@ Nous avons donc décidé de sauvegarder notre liste dans un fichier \emph{xml} e
 Nous devons donc maintenant restaurer cette liste à partir du fichier (que nous avons décidé d'appeler \textit{save.xml}). Nous avons décidé d'effectuer cette restauration dans la fonction \emph{onCreate()}. En effet à chaque nouveau lancement de l'application, on recharge la liste à partir du fichier \textit{save.xml}.
 \begin{figure}[htpb]
 	\center
-	\includegraphics[scale=0.5]{Images/activity_lifecycle.png}
+	\includegraphics[scale=0.45]{Images/activity_lifecycle.png}
 	\caption{Le cycle de vie d'une activité}
 \end{figure}
 
-Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer notre propre parseur.
-%TODO Guillaume explication sauvegarde grâce au parseur
+Afin d'enregistrer cette liste dans le fichier \emph{save.xml}, nous avons créer notre propre parseur.
+Ce parseur \emph{xml} à été développé à partir de la librairie \href{http://www.jdom.org/}{\textbf{JDOM}} et permet de charger et sauvegarder des fichiers xml
+de la forme :
+\begin{lstlisting}[language=XML]
+<backup>
+	<list name="listName" open="true|false">
+		</task name="taskName" checked="true|false"/>
+	</list>
+</backup>
+\end{lstlisting}
+Le parseur va parcourir le fichier et lorsqu'il rencontre une balise \emph{list}, il créer un objet de type \emph{ListT} et lorsqu'il rencontre une balise
+\emph{task}, il créer un objet de type \emph{Task} qu'il ajoute à la dernière liste créée.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 6
@@ -297,11 +323,24 @@ Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer not
 \newpage
 \section{Expérimentation}
 \label{experimentation}
-%TODO Guillaume
+Pour rendre notre application nous avons essayé de mettre en place un système de \emph{Swipe} pour la suppression des listes et des tâches, et un système de
+\emph{Drag and Drop} pour les déplacer. Pour cela nous avons essayé d'utiliser un \href{https://github.com/bauerca/drag-sort-listview}{Framework} qui permet
+d'appliquer des effet graphiques sur des \emph{ListView}. Seulement notre application est basée sur des \emph{ExpandableListView}. Ce qui ne permet son
+utilisation sans réécrire une bonne partie du Framework.
 
 \subsection{Suppression par Swipe}
+Le but de cette gesture aurait été de pouvoir supprimer une tâche ou une liste de tâches sans avoir de boîte de dialogue pour confirmer la suppression, se qui
+ajouterai du dynamisme à notre application
 
 \subsection{Déplacement de listes/tâches par Drag and Drop}
+Dans la configuration actuel de notre application, il n'est pas possible de déplacer ni les listes, ni les tâches. Cette gesture aurait permis de remédier à
+cela. Le \emph{Drag and Drop} aurait été implémenté de la manière suivante :
+\begin{itemize}
+	\item Sur la liste et la tâche, aurait été affiché un bouton qui lorsque l'on appui dessus active le \emph{Drag and Drop} et permet le déplacement de la
+liste ou de la tâche. L'utilisation du bouton est importante puisqu'elle empêche à l'application de confondre le \emph{Drag and Drop} et le \emph{Swipe}.
+	\item Les tâches pourraient ainsi être déplacées soit à l'intérieur de la liste, soit déplacées d'une liste à un autre.
+\end{itemize}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -310,7 +349,7 @@ Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer not
 \newpage
 \section{Limite de l'application}
 Notre application à ses propres limites.
-On pourrait imaginer d'ajouter certaines fonctionnalitées comme par exemple:
+On pourrait imaginer d'ajouter certaines fonctionnalités comme par exemple:
 \begin{itemize}
 \item Recherche (\includegraphics[scale=0.2]{Images/search.png}): qui permetterai à l'utilisateur d'afficher seulement les listes qui ont un nom ou qui ont des tâches dont le nom contient la chaîne du filtre.
 \item Partage (\includegraphics[scale=0.2]{Images/share.png}): qui permettrai à l'utilisateur de partager sa ou ses listes sur des réseaux sociaux ou par mail.
