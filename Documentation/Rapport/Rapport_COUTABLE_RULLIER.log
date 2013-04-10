@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  8 APR 2013 11:17
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  10 APR 2013 17:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -629,7 +629,7 @@ Package pdftricks Warning: ****************************************
 (pdftricks)                [psTricks support in PDF (CVR, ACL)]
 (pdftricks)                ****************************************.
 
-runsystem(touch /tmp/w18-test-201348677)...disabled (restricted).
+runsystem(touch /tmp/w18-test-20134101039)...disabled (restricted).
 
 
 Package pdftricks Warning: ****************************************
@@ -1364,20 +1364,20 @@ less on input line 110.
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
 less on input line 111.
 
-<Images/Taskinator.png, id=71, 128.48pt x 128.48pt>
+<Images/Taskinator.png, id=87, 128.48pt x 128.48pt>
 File: Images/Taskinator.png Graphic file (type png)
 
 <use Images/Taskinator.png>
 Package pdftex.def Info: Images/Taskinator.png used on input line 126.
 (pdftex.def)             Requested size: 28.45192pt x 28.45274pt.
- <Images/android.png, id=73, 256.96pt x 256.96pt>
+ <Images/android.png, id=89, 256.96pt x 256.96pt>
 File: Images/android.png Graphic file (type png)
 
 <use Images/android.png>
 Package pdftex.def Info: Images/android.png used on input line 126.
 (pdftex.def)             Requested size: 28.44997pt x 28.45274pt.
 
-<Images/universite.png, id=74, 219.4599pt x 101.6598pt>
+<Images/universite.png, id=90, 219.4599pt x 101.6598pt>
 File: Images/universite.png Graphic file (type png)
 
 <use Images/universite.png>
@@ -1409,71 +1409,143 @@ been already used, duplicate ignored
                    \relax 
 l.145 \newpage
                [1] [2] [3] [4]
+<Images/mainActivity.png, id=166, 409.53pt x 652.4375pt>
+File: Images/mainActivity.png Graphic file (type png)
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 222.
+<use Images/mainActivity.png>
+Package pdftex.def Info: Images/mainActivity.png used on input line 222.
+(pdftex.def)             Requested size: 105.2751pt x 167.7183pt.
 
-[5] <Images/dia_classe.png, id=155, 389.455pt x 220.825pt>
+<Images/mainActivityPart.png, id=167, 409.53pt x 652.4375pt>
+File: Images/mainActivityPart.png Graphic file (type png)
+
+<use Images/mainActivityPart.png>
+Package pdftex.def Info: Images/mainActivityPart.png used on input line 223.
+(pdftex.def)             Requested size: 105.2751pt x 167.7183pt.
+
+<Images/addList.png, id=168, 411.5375pt x 651.43375pt>
+File: Images/addList.png Graphic file (type png)
+
+<use Images/addList.png>
+Package pdftex.def Info: Images/addList.png used on input line 234.
+(pdftex.def)             Requested size: 105.2751pt x 166.63525pt.
+
+<Images/enteteList.png, id=169, 408.52625pt x 651.43375pt>
+File: Images/enteteList.png Graphic file (type png)
+
+<use Images/enteteList.png>
+Package pdftex.def Info: Images/enteteList.png used on input line 235.
+(pdftex.def)             Requested size: 105.2751pt x 167.86783pt.
+
+<Images/listVide.png, id=170, 411.5375pt x 652.4375pt>
+File: Images/listVide.png Graphic file (type png)
+
+<use Images/listVide.png>
+Package pdftex.def Info: Images/listVide.png used on input line 236.
+(pdftex.def)             Requested size: 105.2751pt x 166.89201pt.
+ <Images/addTask.png, id=171, 409.53pt x 651.43375pt>
+File: Images/addTask.png Graphic file (type png)
+
+<use Images/addTask.png>
+Package pdftex.def Info: Images/addTask.png used on input line 243.
+(pdftex.def)             Requested size: 105.2751pt x 167.46028pt.
+
+<Images/listTask.png, id=172, 410.53375pt x 653.44125pt>
+File: Images/listTask.png Graphic file (type png)
+
+<use Images/listTask.png>
+Package pdftex.def Info: Images/listTask.png used on input line 244.
+(pdftex.def)             Requested size: 105.2751pt x 167.55757pt.
+ [5 <./Images/mainActivity.png> <./Images/mainActivityPart.png> <./Images/addLi
+st.png> <./Images/enteteList.png> <./Images/listVide.png>] <Images/modify.png, 
+id=190, 144.54pt x 144.54pt>
+File: Images/modify.png Graphic file (type png)
+ <use Images/modify.png>
+Package pdftex.def Info: Images/modify.png used on input line 249.
+(pdftex.def)             Requested size: 14.22636pt x 14.22546pt.
+
+<Images/trash_empty.png, id=191, 144.54pt x 144.54pt>
+File: Images/trash_empty.png Graphic file (type png)
+
+<use Images/trash_empty.png>
+Package pdftex.def Info: Images/trash_empty.png used on input line 250.
+(pdftex.def)             Requested size: 14.22636pt x 14.22546pt.
+
+<Images/listTaskChecked.png, id=192, 410.53375pt x 649.42625pt>
+File: Images/listTaskChecked.png Graphic file (type png)
+
+<use Images/listTaskChecked.png>
+Package pdftex.def Info: Images/listTaskChecked.png used on input line 255.
+(pdftex.def)             Requested size: 105.2751pt x 166.52803pt.
+
+<Images/listTwoTask.png, id=193, 407.5225pt x 648.4225pt>
+File: Images/listTwoTask.png Graphic file (type png)
+
+<use Images/listTwoTask.png>
+Package pdftex.def Info: Images/listTwoTask.png used on input line 256.
+(pdftex.def)             Requested size: 105.2751pt x 167.50742pt.
+ [6 <./Images/addTask.png> <./Images/listTask.png> <./Images/modify.png> <./Ima
+ges/trash_empty.png>] [7 <./Images/listTaskChecked.png> <./Images/listTwoTask.p
+ng>]
+<Images/dia_classe.png, id=217, 389.455pt x 220.825pt>
 File: Images/dia_classe.png Graphic file (type png)
 
 <use Images/dia_classe.png>
-Package pdftex.def Info: Images/dia_classe.png used on input line 262.
+Package pdftex.def Info: Images/dia_classe.png used on input line 276.
 (pdftex.def)             Requested size: 194.72702pt x 110.41222pt.
- [6 <./Images/dia_classe.png>]
-<Images/activity_lifecycle.png, id=163, 514.92375pt x 665.48625pt>
+ [8 <./Images/dia_classe.png>]
+<Images/activity_lifecycle.png, id=224, 514.92375pt x 665.48625pt>
 File: Images/activity_lifecycle.png Graphic file (type png)
 
 <use Images/activity_lifecycle.png>
-Package pdftex.def Info: Images/activity_lifecycle.png used on input line 281.
+Package pdftex.def Info: Images/activity_lifecycle.png used on input line 295.
 (pdftex.def)             Requested size: 257.46124pt x 332.74231pt.
- [7 <./Images/activity_lifecycle.png>]
-<Images/search.png, id=171, 64.24pt x 64.24pt>
+ [9 <./Images/activity_lifecycle.png>]
+[10] <Images/search.png, id=237, 64.24pt x 64.24pt>
 File: Images/search.png Graphic file (type png)
  <use Images/search.png>
-Package pdftex.def Info: Images/search.png used on input line 297.
+Package pdftex.def Info: Images/search.png used on input line 323.
 (pdftex.def)             Requested size: 12.84776pt x 12.84776pt.
 
-<Images/share.png, id=172, 64.24pt x 64.24pt>
+<Images/share.png, id=238, 64.24pt x 64.24pt>
 File: Images/share.png Graphic file (type png)
  <use Images/share.png>
-Package pdftex.def Info: Images/share.png used on input line 298.
+Package pdftex.def Info: Images/share.png used on input line 324.
 (pdftex.def)             Requested size: 12.84776pt x 12.84776pt.
 
-<Images/favorite.png, id=173, 64.24pt x 64.24pt>
+<Images/favorite.png, id=239, 64.24pt x 64.24pt>
 File: Images/favorite.png Graphic file (type png)
  <use Images/favorite.png>
-Package pdftex.def Info: Images/favorite.png used on input line 299.
+Package pdftex.def Info: Images/favorite.png used on input line 325.
 (pdftex.def)             Requested size: 12.84776pt x 12.84776pt.
 
-[8 <./Images/search.png> <./Images/share.png> <./Images/favorite.png>]
-
+<Images/event.png, id=240, 64.24pt x 64.24pt>
+File: Images/event.png Graphic file (type png)
+ <use Images/event.png>
+Package pdftex.def Info: Images/event.png used on input line 326.
+(pdftex.def)             Requested size: 12.84776pt x 12.84776pt.
+ [11 <./Images/search.png> <./Images/share.png> <./Images/favorite.png> <./Imag
+es/event.png>] 
 AED: lastpage setting LastPage
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 312.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 312.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 339.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 339.
  (./Rapport_COUTABLE_RULLIER.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 312.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 312.
-
-
-Package rerunfilecheck Warning: File `Rapport_COUTABLE_RULLIER.out' has changed
-.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Rapport_COUTABLE_RULLIER.out':
-(rerunfilecheck)             Before: 758AEFCF6559723B2953559E2E53E65D;1136
-(rerunfilecheck)             After:  C87C4715550CB6EA97FD610381043DDE;1158.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 312.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 339.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 339.
+Package rerunfilecheck Info: File `Rapport_COUTABLE_RULLIER.out' has not change
+d.
+(rerunfilecheck)             Checksum: 55AF20E0AEC384F9C8D8FC7CA58D66A5;1464.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 339.
  ) 
 Here is how much of TeX's memory you used:
- 24417 strings out of 493488
- 425231 string characters out of 3141326
- 590449 words of memory out of 3000000
- 27179 multiletter control sequences out of 15000+200000
- 14478 words of font info for 35 fonts, out of 3000000 for 9000
+ 24501 strings out of 493488
+ 426967 string characters out of 3141326
+ 589449 words of memory out of 3000000
+ 27236 multiletter control sequences out of 15000+200000
+ 15242 words of font info for 36 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 61i,11n,96p,950b,461s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 61i,11n,96p,950b,626s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></
 usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbi1440.pfb></us
@@ -1482,13 +1554,14 @@ local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/lo
 cal/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/loca
 l/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/local/
 texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texl
-ive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texliv
-e/2012/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on Rapport_COUTABLE_RULLIER.pdf (10 pages, 400898 bytes).
+xlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texl
+ive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texliv
+e/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/
+2012/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on Rapport_COUTABLE_RULLIER.pdf (13 pages, 1544765 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
- 49 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 309 PDF objects out of 1000 (max. 8388607)
+ 241 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 273 words of extra memory for PDF output out of 10000 (max. 10000000)
 

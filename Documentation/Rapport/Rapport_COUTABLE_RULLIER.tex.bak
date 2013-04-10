@@ -164,14 +164,11 @@ La première étape fut d'analyser l'ensemble des fonctionnalités que notre app
 Voici dans un premier temps les fonctionnalités principales:
 \paragraph{Créer une liste:} cette fonctionnalité permet à l'utilisateur de créer une liste vide.
 \paragraph{Créer une tâche:} cette fonctionnalité permet à l'utilisateur de créer une tâche.
-\paragraph{Supprimer un élément:} cette fonctionnalité permet de supprimer une tâche ou une liste. Cette fonctionnalité est à manipuler avec
-précaution, en effet dans le cas d'une liste, la suppression de celle-ci implique aussi la suppression de toutes ses tâches.
+\paragraph{Supprimer un élément:} cette fonctionnalité permet de supprimer une tâche ou une liste. Cette fonctionnalité est à manipuler avec précaution, en effet dans le cas d'une liste, la suppression de celle-ci implique aussi la suppression de toutes ses tâches.
 
 \subsection{Fonctionnalités secondaires}
 Voici les fonctionnalités secondaires:
-\paragraph{Paramètre:} cette fonctionnalité permet à l'utilisateur de modifier le type de l'élément sélectionné. Il pourra par exemple choisir de modifier une liste en liste ordonnée ou en une tâche. Cette fonctionnalité est à manipuler avec précaution, en effet si l'utilisateur décide de transformer une liste en tâche l'ensemble des éléments de la liste seront supprimés. %TODO A voir si on garde ?????
-\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre une liste ou une tâche. Dans le cas d'une liste, toutes ces tâches sont aussi montées/descendues d'un rang. Dans le cas d'une tâche, on autorise un déplacement dans une autre liste. %TODO A voir si on garde ?????
-\paragraph{Aperçu:} cette fonctionnalité permet à l'utilisateur d'avoir un aperçu de sa liste, se qui permettra l'affichage d'un nombre plus important de tâches. %TODO A voir si on garde
+\paragraph{Monter / Descendre:} cette fonctionnalité permet de monter ou descendre une liste ou une tâche. Dans le cas d'une liste, toutes ces tâches sont aussi montées/descendues d'un rang. Dans le cas d'une tâche, on autorise un déplacement dans une autre liste. (Cette fonctionalité n'a pas été implémentée)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 2
@@ -196,7 +193,6 @@ Ce premier scénario permet de créer une liste et d'y ajouté des tâches.
 \item{L'utilisateur crée une liste et lui donne un nom \textit{Ski}.}
 \item{Il crée ensuite une tâche dans cette liste et lui donne un nom \textit{Bonnet}.}
 \item{Il crée ensuite une autre tâche dans cette liste et lui donne un nom \textit{Echarpe}.}
-\item{Il souhaite maintenant échanger les tâches \textit{Bonnet} et \textit{Echarpe}, il reste longtemps appuyé sur la tâche \textit{Bonnet} et la glisse un rang plus bas.} %TODO A voir - voir pour les gestures 
 \item{L'utilisateur supprime la tâche \textit{Bonnet}.}
 \item{L'utilisateur supprime la liste \textit{Ski}. Une popup apparaît pour l'avertir que cette suppression supprimera aussi toutes les tâche de la liste.}
 \end{enumerate}
@@ -209,7 +205,7 @@ Ce scénario permet de créer des listes et de les modifiers. Il permet aussi de
 \item{Il décide ensuite d'inverser ces deux listes, pour cela il reste longtemps appuyé sur la liste \textit{Sac de voyage} et la glisse un rangplus haut.}
 \item{L'utilisateur va ensuite supprimer la liste \textit{Course}.}
 \item{L'utilisateur va ensuite ouvrir une autre application et revenir sur \textit{Taskinator}. Il peut constater que l'application est ouverte avec l'état dans lequel on l'a quittée.}
-\item{Cette fois-ci, l'utilisateur quitte l'application. De même s'il l'a lance à nouveau, celle-ci est ouverte avec le dernier état dans lequel on l'a quittée.}
+\item{Cette fois-ci, l'utilisateur quitte l'application. De même s'il l'a lance à nouveau, celle-ci est ouverte avec le dernier état dans lequel on l'a quittée. C'est à dire que si une liste était ouverte ou fermée quand on a quitté l'application, celle-ci sera dans le même état quand on y reviendra.}
 \end{enumerate}
 
 
@@ -219,39 +215,55 @@ Ce scénario permet de créer des listes et de les modifiers. Il permet aussi de
 \newpage
 \section{L'IHM}
 
+\subsection{L'activité principale}
+L'application est tout simplement composée d'une zone réservée à l'affichage de la liste en cours de création et d'une barre d'action.
+\begin{figure}[H]
+    \center
+    \includegraphics[width=3.7cm]{Images/mainActivity.png}\quad
+    \includegraphics[width=3.7cm]{Images/mainActivityPart.png}
+    \caption{L'application}
+\end{figure}
+
 \subsubsection{Choix réalisés (Position des boutons, Gestures, ...)}
 Dans cette section, nous expliquons les choix effectués et pourquoi nous avons choisi de mettre en place ces solutions:
 
 \begin{itemize}
 \item \textbf{Fonctionnalité de création de liste:} nous avons choisi de créer de nouvelles listes en cliquant sur le bouton "Add list" en bas de l'écran.
-Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle liste. L'utilisateur doit ensuite valider en cliquant sur "OK", s'il appui sur "Cancel", la nouvelle liste ne sera pas créée. Un nouvel item apparaît sur la page. Un nouveau bouton "+" apparaît dans cette liste, il permettra de créer de nouvelles tâches pour la liste.
-\item \textbf{Fonctionnalité de création de tâche:} nous avons choisi de créer de nouvelles tâches en cliquant sur le bouton "+" présent sous chaque liste pour ajouter une tâche à la liste correspondante. Lorsque l'utilisateur clique sur ce bouton, une nouvelle boite de dialogue apparaît et permet de rentrer le nouveau nom de la tâche. L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+"). Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
-\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu.
-\item \textbf{Fonctionnalité \textit{Modifier}:} nous avons choisi d'ajouter cette possibilité de modification du nom sur chaque élément par la présence d'un bouton.
-\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. 
-%TODO A revoir
-Pour plus de sécurité, le focus de la validation de la suppression est par défaut sur \textit{Non}. %TODO A revoir si on a un focus sur android
-%TODO A revoir si on garde
-%\item \textbf{Fonctionnalité \textit{Paramètre}:} nous avons décidé pour cette fonctionnalité (qui peut entraîner la suppression de différents éléments) de faire, également, apparaître une fenêtre d'avertissement. Dans cette fenêtre le focus de la validation du changement est mise à \textit{Non}. On perd cependant un peu de vitesse d'exécution (si l'utilisateur souhaite effectivement bien effectuer ce changement) au profit de plus de sécurité.
+\begin{figure}[H]
+    \center
+    \subfloat[Boîte de dialogue pour le nom de la liste]{\includegraphics[width=3.7cm]{Images/addList.png}}\quad
+    \subfloat[Liste vide fermée]{\includegraphics[width=3.7cm]{Images/enteteList.png}}\quad
+    \subfloat[Liste vide ouverte]{\includegraphics[width=3.7cm]{Images/listVide.png}}
+    \caption{Ajout d'une liste}
+\end{figure}
+Une boite de dialogue apparaît et permet de rentrer le nom de cette nouvelle liste. L'utilisateur doit ensuite valider en cliquant sur "OK", s'il appui sur "Cancel", la nouvelle liste ne sera pas créée. Si l'utilisateur déroule sa liste, un nouvel item apparaît sur la page muni d'un bouton "+". Celui-ci permettra de créer de nouvelles tâches pour la liste.
+\item \textbf{Fonctionnalité de création de tâche:} nous avons choisi de créer de nouvelles tâches en cliquant sur le bouton "+" présent sous chaque liste pour ajouter une tâche à la liste correspondante. Lorsque l'utilisateur clique sur ce bouton, une nouvelle boite de dialogue apparaît et permet de rentrer le nouveau nom de la tâche.
+\begin{figure}[H]
+    \center
+    \subfloat[Boîte de dialogue pour le nom de la tâche]{\includegraphics[width=3.7cm]{Images/addTask.png}}\quad
+    \subfloat[Tâche]{\includegraphics[width=3.7cm]{Images/listTask.png}}
+    \caption{Ajout d'une tâche}
+\end{figure}
+L'utilisateur doit valider l'ajout en cliquant sur "OK". Un nouvel item de tâche apparaît dans la liste (au-dessus du bouton "+"). Nous avons choisi de procéder ainsi plutôt que de mettre un bouton de création dans l'entête de la liste, pour éviter à l'utilisateur de remonter en haut de la liste à chaque fois qu'il souhaite ajouter une tâche (cela peut vite devenir contraignant).
+\item \textbf{Fonctionnalité \textit{Monter} et \textit{Descendre}:} nous avons décidé d'accéder à cette fonctionnalité seulement grâce aux gestures. En effet, il suffit à l'utilisateur de rester longtemps appuyer sur une liste ou tâche et de la glisser à l'endroit voulu. (Fonctionnalitée non implémentée mais expérimentée voir \ref{experimentation}).
+\item \textbf{Fonctionnalité \textit{Modifier}:} nous avons choisi d'ajouter cette possibilité de modification du nom sur chaque élément par la présence du bouton \includegraphics[width=0.5cm]{Images/modify.png}.
+\item \textbf{Fonctionnalité \textit{Supprimer}:} nous avons choisi d'ajouter cette possibilité de suppression sur chaque élément (liste ou tâche) pour que l'utilisateur puisse supprimer plus rapidement. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression d'une liste entraîne la suppression de toutes ses tâches. Le bouton représentant cette fonctionnalité est le suivant \includegraphics[width=0.5cm]{Images/trash_empty.png}
+\item \textbf{Fonctionnalité \textit{Supprimer tout}:} nous avons choisi d'ajouter cette possibilité de supprimer l'ensemble des listes crées par l'utilisateur afin que celui-ci n'est pas à supprimer toutes les tâches une par une s'il souhaite vraiment tout supprimer. De  plus nous avons décidé de faire apparaître une fenêtre d'avertissement car la suppression de l'ensemble des listes est une opération importante.
+\item \textbf{Indicateur:} nous avons choisi d'ajouter sur la liste un indicateur permettant de connaître le nombre de tâches validées sur le nombre de tâche de la liste, afin que l'utilisateur puisse voir l'état de sa liste plus rapidement.
+\begin{figure}[H]
+    \center
+    \subfloat[Tâche validée]{\includegraphics[width=3.7cm]{Images/listTaskChecked.png}} \quad
+    \subfloat[Une tâche validée sur deux]{\includegraphics[width=3.7cm]{Images/listTwoTask.png}}
+    \caption{Validation de tâche et indicateur}
+\end{figure}
 \end{itemize}
 
-%TODO a compléter capture écran
-L'application est tout simplement composée d'une zone réservée à l'affichage de la liste en cours de création et d'une bar d'action.
-\begin{figure}[H]
-%    \center
-%    \includegraphics[width=14cm]{Images/mainWindow.png}
-    \caption{L'application}
-\end{figure}
-
-
-%TODO Menu contextuel
-
 \subsection{Affichage des listes et tâches}
-Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et chacune d'entre elle sa ou ses tâche(s).
-La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
-La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un TextView permettant de taper d'afficher le nom de la tâche, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom sur la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
+Afin d'afficher l'ensemble des listes créées et de leur(s) tâche(s), on a décider d'utiliser ExpandableListView, permettant d'afficher l'ensemble des listes et pour chacune d'entre elle sa ou ses tâche(s).
 
-%TODO --> Liste ouvertes ou non sauvegardée --> Rapport
+La liste est décrite à l'aide du xml list.xml et est représentée par un TextView permettant d'afficher le nom de celle-ci, d'un autre TextView permettant d'afficher le nombre de tâches validées sur le nombre de tâche de la liste, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom de la liste et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression de liste.
+
+La tâche est décrite par le fichier task.xml et est représentée par une checkbox, un TextView permettant de taper d'afficher le nom de la tâche, d'un ImageButton permettant d'ajouter la fonctionnalité de modification du nom sur la tâche et d'un ImageButton permettant d'ajouter la fonctionnalité de suppression sur la tâche.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 4
@@ -287,9 +299,21 @@ Nous devons donc maintenant restaurer cette liste à partir du fichier (que nous
 Afin d'enregistrer cette liste dans le fichier \emph{xml}, nous avons créer notre propre parseur.
 %TODO Guillaume explication sauvegarde grâce au parseur
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Etape 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Expérimentation}
+\label{experimentation}
+%TODO Guillaume
+
+\subsection{Suppression par Swipe}
+
+\subsection{Déplacement de listes/tâches par Drag and Drop}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Etape 7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Limite de l'application}
@@ -299,6 +323,7 @@ On pourrait imaginer d'ajouter certaines fonctionnalitées comme par exemple:
 \item Recherche (\includegraphics[scale=0.2]{Images/search.png}): qui permetterai à l'utilisateur d'afficher seulement les listes qui ont un nom ou qui ont des tâches dont le nom contient la chaîne du filtre.
 \item Partage (\includegraphics[scale=0.2]{Images/share.png}): qui permettrai à l'utilisateur de partager sa ou ses listes sur des réseaux sociaux ou par mail.
 \item Favoris (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de mettre certaines listes ou tâches en favoris et d'y avoir accès via un onglet favoris. Cela permetterai d'avoir un accès plus rapide.
+\item Rappel (\includegraphics[scale=0.2]{Images/favorite.png}): qui permetterai à l'utilisateur de définir un rappel sur une tâche afin que celle-ci soit exécutée dans les temps.
 \end{itemize}
 %TODO A compléter si des idées A voir si on met tout --> Programmer un rappel d'evenement sur une tâche ajouter un champ information/note
 
